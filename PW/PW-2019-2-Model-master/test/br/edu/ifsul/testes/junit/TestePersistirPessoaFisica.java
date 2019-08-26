@@ -62,7 +62,7 @@ public class TestePersistirPessoaFisica {
             user.setReferencia("Caixa Economica");
             user.setRg("1123456742");
             user.setNascimento(new GregorianCalendar(1995, Calendar.DECEMBER, 11));
-            user.setCidade(em.find(Cidade.class, 1));
+            user.setCidade(em.find(Cidade.class, 2));
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
