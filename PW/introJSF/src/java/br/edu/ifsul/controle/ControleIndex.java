@@ -7,15 +7,19 @@ package br.edu.ifsul.controle;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author 20172PF.CC0095
  */
 @ManagedBean(name = "controleIndex")
-@RequestScoped
+@RequestScoped // ciclo de vida de requisição
+//@SessionScoped // ciclo de vida de sessão
+//@ApplicationScoped // ciclo de aplicacao
 public class ControleIndex implements Serializable{
     
     private String ola;
