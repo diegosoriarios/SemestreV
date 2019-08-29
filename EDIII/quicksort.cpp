@@ -40,7 +40,7 @@ void mostra(int a[], int TAM) {
 int main() { 
 	int vetor[] = {10, 7, 8, 9, 1, 5}; 
 	int TAM = sizeof(vetor) / sizeof(vetor[0]); 
-    mostra(vetor, TAM); 
+    	mostra(vetor, TAM); 
 	quickSort(vetor, 0, TAM - 1); 
 	cout << "Sorted array: \n"; 
 	mostra(vetor, TAM); 
