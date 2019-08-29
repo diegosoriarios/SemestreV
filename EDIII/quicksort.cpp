@@ -1,67 +1,48 @@
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <iostream> 
+using namespace std; 
 
-using namespace std;
+void troca(int* a, int* b) { 
+	int t = *a; 
+	*a = *b; 
+	*b = t; 
+} 
 
-void quick(int a[], int p, int r);
-int particionamento(int a[], int p, int r);
-void troca(int a, int b);
-void mostrar(int a[], int tam);
+int particiona(int a[], int p, int r) { 
+	int pivo = a[r];
+	int i = (p - 1);
 
-int main() {
-    int TAM = 7;
-    int vetor[TAM];
+	for (int j = p; j <= r - 1; j++) {
+		if (a[j] < pivo) { 
+			i++;
+			troca(&a[i], &a[j]); 
+		} 
+	} 
+	troca(&a[i + 1], &a[r]); 
+	return (i + 1); 
+} 
 
-    srand (time(NULL));
-    for(int i = 0; i < TAM; i++) {
-        vetor[i] = rand() % 10 + 1;
-    }
+void quickSort(int a[], int p, int r) { 
+	if (p < r) { 
+		int q = particiona(a, p, r); 
 
-    mostrar(vetor, TAM);
+		quickSort(a, p, q - 1); 
+		quickSort(a, q + 1, r); 
+	} 
+} 
 
-    quick(vetor, 0, TAM);
+void mostra(int a[], int TAM) { 
+	int i; 
+	for (i = 0; i < TAM; i++) 
+		cout << a[i] << " "; 
+	cout << endl; 
+} 
 
-    mostrar(vetor, TAM);
-}
-
-void mostrar(int a[], int tam) {
-    for(int i = 0; i < tam; i++) {
-        cout << a[i] << "\t";
-    }
-    cout << "\n";
-}
-
-void quick(int a[], int p, int r) {
-    if(p < r) {
-        int q = particionamento(a, p, r);
-        quick(a, p, q-1);
-        quick(a, q+1, r);
-    }
-}
-
-int particionamento(int a[], int p, int r) {
-    int pivo = a[r];
-    int i = p;
-    int j = r - 1;
-    while( i < j ) {
-        while(a[i] <= pivo) {
-            i++;
-        }
-
-        while(a[j] > pivo) {
-            j--;
-        }
-
-        troca(a[i], a[j]);
-        troca(a[r], a[j]);
-        return j;
-    }
-    return j;
-}
-
-void troca(int a, int b) {
-    int aux = b;
-    b = a;
-    a = aux;
+int main() { 
+	int vetor[] = {10, 7, 8, 9, 1, 5}; 
+	int TAM = sizeof(vetor) / sizeof(vetor[0]); 
+    mostra(vetor, TAM); 
+	quickSort(vetor, 0, TAM - 1); 
+	cout << "Sorted array: \n"; 
+	mostra(vetor, TAM); 
+	return 0; 
 }
