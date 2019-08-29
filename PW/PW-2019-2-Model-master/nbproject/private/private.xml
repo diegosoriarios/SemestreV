@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/20172PF.CC0095/Downloads/SemestreV/PW/PW-2019-2-Model-master/test/br/edu/ifsul/testes/junit/TestePersistirContaReceber.java</file>
+            <file>file:/C:/Users/20172PF.CC0095/Downloads/SemestreV/PW/PW-2019-2-Model-master/test/br/edu/ifsul/testes/junit/TestePersistirOrdemServico.java</file>
+            <file>file:/C:/Users/20172PF.CC0095/Downloads/SemestreV/PW/PW-2019-2-Model-master/src/br/edu/ifsul/modelo/ContaReceberID.java</file>
+            <file>file:/C:/Users/20172PF.CC0095/Downloads/SemestreV/PW/PW-2019-2-Model-master/src/br/edu/ifsul/modelo/OrdemServico.java</file>
+        </group>
     </open-files>
 </project-private>
