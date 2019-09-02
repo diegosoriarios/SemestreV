@@ -7,10 +7,12 @@ package br.edu.ifsul.controle;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -28,6 +30,20 @@ public class ControleIndex implements Serializable{
     public ControleIndex() {
         ola = "Seja bem vindo ao SJF";
         dataSO = Calendar.getInstance();
+    }
+    
+    public String sobre(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage message = new FacesMessage("Navegando ao arquivo sobre.xhtml");
+        context.addMessage(null, message);
+        return "/sobre?faces-redirect=true";
+    }
+    
+    public String index() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage message = new FacesMessage("Navegando ao arquivo index.xhtml");
+        context.addMessage(null, message);
+        return "/index?faces-redirect=true";
     }
 
     public String getOla() {
