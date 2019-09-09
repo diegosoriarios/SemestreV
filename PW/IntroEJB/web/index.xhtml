@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>
+            <h:outputLabel value="#{controleBeanHora.beanHora.dataHoraServidor}" /> 
+        </h1>
+        
+        <h1>
+            <h:outputLabel value="#{controleBeanHora.usuario}" />
+        </h1>
+        
+        <h1>
+            <h:outputLabel value="Contador: #{controleBeanHora.beanHora.beanContador.contador}" />
+        </h1>
+        <br />
+        
+        <h:form>
+            <h:inputText value="#{controleUsuario.beanUsuario.usuario}" />
+            <h:commandButton value ="Informar usuário"
+                             action="#{controleUsuario.informarUsuario()}" />
+        </h:form>
+        
+        <br />
+        
+        <h:dataTable value="#{controleBeanHora.beanHora.nomes}" var="nome">
+            <h:column>
+                <h:outputLabel value="#{nome}"/>
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+
