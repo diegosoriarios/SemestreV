@@ -17,7 +17,8 @@
         
         <h:dataTable value="#{controleBeanPessoas.beanPessoas.nomes}" var="nome">
             <h:column>
-                <h:outputLabel value="#{nome}"/>
+                <h:outputLabel value="#{nome.nome}"/>
+                <h:outputLabel value="#{nome.idade}"/>
             </h:column>
         </h:dataTable>
     </h:body>

@@ -17,23 +17,24 @@ import javax.ejb.Stateful;
  */
 @Stateful
 public class BeanPessoas implements Serializable{
-    private List<String> nomes = new ArrayList<>();
+    private List<Pessoas> nomes = new ArrayList<>();
     private String nome;
     private int idade;
 
     public BeanPessoas() {
     }
 
-    public List<String> setNewPessoa(){
-        nomes.add(nome + " - " + Integer.toString(idade) + " anos");
+    public List<Pessoas> setNewPessoa(){
+        Pessoas p = new Pessoas(nome, idade);
+        nomes.add(p);
         return nomes;
     }
     
-    public List<String> getNomes() {
+    public List<Pessoas> getNomes() {
         return nomes;
     }
 
-    public void setNomes(List<String> nomes) {
+    public void setNomes(List<Pessoas> nomes) {
         this.nomes = nomes;
     }
 
