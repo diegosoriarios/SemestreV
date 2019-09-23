@@ -5,33 +5,31 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title><ui:insert name="titulo"></ui:insert></title>
-        <h:outputStylesheet library="css" name="estilos.css" />
-        <h:outputScript library="js" name="scripts.js" />
+        <title><ui:insert name="titulo">aqui vai o titulo</ui:insert></title>
+        <h:outputStylesheet library="css" name="estilos.css"/>
+        <h:outputScript library="js" name="scripts.js"/>
     </h:head>
     <h:body>
         <h:form id="formMenu" prependId="false">
             <p:megaMenu>
-                <p:menuitem value="Inicio" 
+                <p:menuitem value="Inicio"
                             url="#{facesContext.externalContext.requestContextPath}/index.xhtml"
-                            icon="pi pi-home" />
+                            icon="pi pi-home"/>
                 <p:submenu label="Cadastros">
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controleEstado.listar()}"
                                         value="Manutenção de Estados"
-                                        ajax="false" />
-                        </p:submenu>
+                                        ajax="false"/>
+                        </p:submenu>                        
                     </p:column>
                 </p:submenu>
             </p:megaMenu>
-            
-            <ui:insert name="conteudo">
-                
-            </ui:insert>
-            
-            <ui:include src="ajaxstatus.xhtml" />
+
         </h:form>
+        <ui:insert name="conteudo">
+
+        </ui:insert>
+        <ui:include src="ajaxstatus.xhtml"/>        
     </h:body>
 </html>
-
