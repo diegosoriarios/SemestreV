@@ -17,6 +17,8 @@ public class TesteListarEstados {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String[] args) {       
         EntityManagerFactory emf = 
                 Persistence.createEntityManagerFactory("PW-2019-2-ModelPU");
