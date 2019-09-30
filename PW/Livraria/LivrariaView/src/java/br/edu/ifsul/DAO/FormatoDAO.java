@@ -5,7 +5,7 @@
  */
 package br.edu.ifsul.DAO;
 
-import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.Formato;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
@@ -14,9 +14,9 @@ import javax.ejb.Stateful;
  * @author 20172PF.CC0095
  */
 @Stateful
-public class CidadeDAO extends DAOGenerico<Cidade> implements Serializable{
-    public CidadeDAO() {
+public class FormatoDAO extends DAOGenerico<Formato> implements Serializable{
+    public FormatoDAO() {
         super();
-        classePersistente = Cidade.class;
+        classePersistente = Formato.class;
     }
 }

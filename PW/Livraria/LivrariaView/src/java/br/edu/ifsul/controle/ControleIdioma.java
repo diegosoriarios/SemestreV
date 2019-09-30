@@ -5,8 +5,8 @@
  */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.DAO.EstadoDAO;
-import br.edu.ifsul.modelo.Estado;
+import br.edu.ifsul.DAO.IdiomaDAO;
+import br.edu.ifsul.modelo.Idioma;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -19,21 +19,21 @@ import javax.inject.Named;
  */
 @Named(value = "controleEstado")
 @ViewScoped
-public class ControleEstado implements Serializable{
+public class ControleIdioma implements Serializable{
     @EJB
-    private EstadoDAO dao;
-    private Estado objeto;
+    private IdiomaDAO dao;
+    private Idioma objeto;
 
-    public ControleEstado() {
+    public ControleIdioma() {
         
     }
     
     public String listar() {
-        return "/privado/estado/listar?faces-redirect=true";
+        return "/privado/idioma/listar?faces-redirect=true";
     }
     
     public void novo() {
-        objeto = new Estado();
+        objeto = new Idioma();
     }
     
     public void alterar(Object id) {
@@ -67,19 +67,19 @@ public class ControleEstado implements Serializable{
         }
     }
     
-    public EstadoDAO getDao() {
+    public IdiomaDAO getDao() {
         return dao;
     }
 
-    public void setDao(EstadoDAO dao) {
+    public void setDao(IdiomaDAO dao) {
         this.dao = dao;
     }
 
-    public Estado getObjeto() {
+    public Idioma getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Estado objeto) {
+    public void setObjeto(Idioma objeto) {
         this.objeto = objeto;
     }
     

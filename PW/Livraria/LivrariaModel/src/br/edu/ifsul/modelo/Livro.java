@@ -133,7 +133,4 @@ public class Livro extends LivroBasico implements Serializable {
         this.formato = formato;
     }
     
-    
-    
-    
 }

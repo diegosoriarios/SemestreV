@@ -1,11 +1,11 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package br.edu.ifsul.converters;
 
-import br.edu.ifsul.modelo.Estado;
+import br.edu.ifsul.modelo.Formato;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
@@ -22,9 +22,9 @@ import javax.persistence.PersistenceContext;
  *
  * @author 20172PF.CC0095
  */
-@Named(value = "converteEstado")
+@Named(value = "converteFormato")
 @RequestScoped
-public class ConverteEstado implements Serializable, Converter {
+public class ConverteFormato implements Serializable, Converter {
 
     @PersistenceContext(unitName = "PW-2019-2-WebPU")
     private EntityManager em;
@@ -35,7 +35,7 @@ public class ConverteEstado implements Serializable, Converter {
             return null;
         }
         
-        return em.find(Estado.class, Integer.parseInt(string));
+        return em.find(Formato.class, Integer.parseInt(string));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ConverteEstado implements Serializable, Converter {
             return null;
         }
         
-        Estado obj = (Estado) t;
+        Formato obj = (Formato) t;
         
         return obj.getId().toString();
     }

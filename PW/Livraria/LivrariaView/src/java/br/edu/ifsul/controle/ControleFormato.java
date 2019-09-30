@@ -5,9 +5,9 @@
  */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.DAO.CidadeDAO;
-import br.edu.ifsul.DAO.EstadoDAO;
-import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.DAO.FormatoDAO;
+import br.edu.ifsul.DAO.IdiomaDAO;
+import br.edu.ifsul.modelo.Formato;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -18,26 +18,26 @@ import javax.inject.Named;
  *
  * @author 20172PF.CC0095
  */
-@Named(value = "controleCidade")
+@Named(value = "controleFormato")
 @ViewScoped
-public class ControleCidade implements Serializable{
+public class ControleFormato implements Serializable{
     @EJB
-    private CidadeDAO dao;
-    private Cidade objeto;
+    private FormatoDAO dao;
+    private Formato objeto;
 
     @EJB
-    private EstadoDAO daoEstado;
+    private IdiomaDAO daoEstado;
     
-    public ControleCidade() {
+    public ControleFormato() {
         
     }
     
     public String listar() {
-        return "/privado/cidade/listar?faces-redirect=true";
+        return "/privado/formato/listar?faces-redirect=true";
     }
     
     public void novo() {
-        objeto = new Cidade();
+        objeto = new Formato();
     }
     
     public void alterar(Object id) {
@@ -60,7 +60,7 @@ public class ControleCidade implements Serializable{
     
     public void salvar() {
         try {
-            if (objeto.getId() == null) {
+            if (objeto.getId()== null) {
                 dao.persist(objeto);
             } else {
                 dao.merge(objeto);
@@ -71,27 +71,27 @@ public class ControleCidade implements Serializable{
         }
     }
     
-    public CidadeDAO getDao() {
+    public FormatoDAO getDao() {
         return dao;
     }
 
-    public void setDao(CidadeDAO dao) {
+    public void setDao(FormatoDAO dao) {
         this.dao = dao;
     }
 
-    public Cidade getObjeto() {
+    public Formato getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Cidade objeto) {
+    public void setObjeto(Formato objeto) {
         this.objeto = objeto;
     }
 
-    public EstadoDAO getDaoEstado() {
+    public IdiomaDAO getDaoEstado() {
         return daoEstado;
     }
 
-    public void setDaoEstado(EstadoDAO daoEstado) {
+    public void setDaoEstado(IdiomaDAO daoEstado) {
         this.daoEstado = daoEstado;
     }
     

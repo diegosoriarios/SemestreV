@@ -5,7 +5,7 @@
  */
 package br.edu.ifsul.converters;
 
-import br.edu.ifsul.modelo.Cidade;
+import br.edu.ifsul.modelo.Idioma;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
@@ -22,9 +22,9 @@ import javax.persistence.PersistenceContext;
  *
  * @author 20172PF.CC0095
  */
-@Named(value = "converteCidade")
+@Named(value = "converteIdioma")
 @RequestScoped
-public class ConverteCidade implements Serializable, Converter {
+public class ConverteIdioma implements Serializable, Converter {
 
     @PersistenceContext(unitName = "PW-2019-2-WebPU")
     private EntityManager em;
@@ -35,7 +35,7 @@ public class ConverteCidade implements Serializable, Converter {
             return null;
         }
         
-        return em.find(Cidade.class, Integer.parseInt(string));
+        return em.find(Idioma.class, Integer.parseInt(string));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ConverteCidade implements Serializable, Converter {
             return null;
         }
         
-        Cidade obj = (Cidade) t;
+        Idioma obj = (Idioma) t;
         
         return obj.getId().toString();
     }
