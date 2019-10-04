@@ -6,17 +6,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">CRUD de Cidades</ui:define>
+        <ui:define name="titulo">CRUD de Livros</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem" prependId="false">
                 <p:growl />
                 <p:commandButton value="Novo" 
-                                 actionListener="#{controleCidade.novo()}"
+                                 actionListener="#{controleLivro.novo()}"
                                  icon="pi pi-plus"
                                  update="formEdicao" 
                                  process="@this"
                                  oncomplete="PF('dlg').show();" />
-                <p:dataTable value="#{controleCidade.dao.listaObjetos}" var="obj">
+                <p:dataTable value="#{controleLivro.dao.listaObjetos}" var="obj">
                     <p:column headerText="ID">
                         <p:outputLabel value="#{obj.id}" />
                     </p:column>
@@ -28,13 +28,13 @@
                     </p:column>
                     <p:column headerText="Ações">
                         <div align="center">
-                            <p:commandButton actionListener="#{controleCidade.alterar(obj.id)}"
+                            <p:commandButton actionListener="#{controleLivro.alterar(obj.id)}"
                                              icon="pi pi-pencil"
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
                                              oncomplete="PF('dlg').show();" />
-                            <p:commandButton actionListener="#{controleCidade.remover(obj.id)}"
+                            <p:commandButton actionListener="#{controleLivro.remover(obj.id)}"
                                              icon="pi pi-trash"
                                              title="Remover"
                                              update="@form"
@@ -51,23 +51,23 @@
                     <div align="center">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleCidade.objeto.id}" 
+                            <p:inputText value="#{controleLivro.objeto.id}" 
                                          readonly="true" 
                                          size="5" />
                             
                             <p:outputLabel value="Nome" for="txtNome" />
                             <p:inputText id="txtNome" 
-                                         value="#{controleCidade.objeto.nome}"
+                                         value="#{controleLivro.objeto.nome}"
                                          size="50" maxlength="50" 
                                          placeholder="Obrigatório"/>
                            
                             <p:outputLabel value="Estado" for="selectEstado" />
-                            <p:selectOneMenu id="selectEstado" value="#{controleCidade.objeto.estado}"
+                            <p:selectOneMenu id="selectEstado" value="#{controleLivro.objeto.estado}"
                                              filter="true" filterMatchMode="startsWith" >
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true" />
                                 <f:converter binding="#{converteEstado}" />
-                                <f:selectItems value="#{controleCidade.daoEstado.listaTodos}"
+                                <f:selectItems value="#{controleLivro.daoEstado.listaTodos}"
                                                var="est" itemLabel="#{est.nome}" />
                             </p:selectOneMenu>
                         </p:panelGrid>
@@ -75,7 +75,7 @@
                     <p:panel>
                         <div align="center">
                             <p:commandButton value="Salvar"
-                                             actionListener="#{controleCidade.salvar()}"
+                                             actionListener="#{controleLivro.salvar()}"
                                              icon="pi pi-save"
                                              update="formEdicao formListagem"
                                              process="@form"

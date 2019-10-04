@@ -18,7 +18,7 @@ public class DAOGenerico<TIPO> implements Serializable {
     
     private List<TIPO> listaObjetos; //retorna uma consulta paginada
     private List<TIPO> listaTodos; //retorna todos os registros
-    @PersistenceContext(unitName = "PW-2019-2-WebPU")
+    @PersistenceContext(unitName = "Livraria-PW-WebPU")
     protected EntityManager em;
     protected Class classePersistente;
 
