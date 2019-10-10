@@ -1,9 +1,9 @@
-#include <iostream> 
+#include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <fstream>
 
-using namespace std; 
+using namespace std;
 
 void generateArrayRand(int a[], int TAM, string tipo) {
 	tipo = "Aleatório";
@@ -29,26 +29,26 @@ void generateArrayDecresc(int a[], int TAM, string tipo) {
 /**
  * Bubble Sort
  */
-void swap(int *a, int *b){ 
-    int temp = *a; 
-    *a = *b; 
-    *b = temp; 
-} 
+void swap(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
-void bubbleSort(int *v, int n){ 
-    if (n < 1)return; 
- 
-    for (int i=0; i<n; i++) 
-        if (v[i] > v[i+1]) 
-            swap(&v[i], &v[i+1]); 
-    bubbleSort(v, n-1); 
+void bubbleSort(int *v, int n){
+    if (n < 1)return;
+
+    for (int i=0; i<n; i++)
+        if (v[i] > v[i+1])
+            swap(&v[i], &v[i+1]);
+    bubbleSort(v, n-1);
 }
 
 /**
- * Check if is ordened
+ * Check if is ordered
  */
 
-bool isOrdened(int vetor[], int n) {
+bool isOrdered(int vetor[], int n) {
 	int k, j, aux;
 
     for (k = 1; k < n; k++) {
@@ -67,43 +67,43 @@ bool isOrdened(int vetor[], int n) {
  * Quick Sort
  */
 
-void troca(int* a, int* b) { 
-	int t = *a; 
-	*a = *b; 
-	*b = t; 
+void troca(int* a, int* b) {
+	int t = *a;
+	*a = *b;
+	*b = t;
 }
 
-int particiona(int a[], int p, int r) { 
+int particiona(int a[], int p, int r) {
 	int pivo = a[r];
 	int i = (p - 1);
 
 	for (int j = p; j <= r - 1; j++) {
-		if (a[j] < pivo) { 
+		if (a[j] < pivo) {
 			i++;
-			troca(&a[i], &a[j]); 
-		} 
-	} 
-	troca(&a[i + 1], &a[r]); 
-	return (i + 1); 
-} 
-
-void quickSort(int a[], int p, int r) { 
-	if (p < r) { 
-		int q = particiona(a, p, r); 
-
-		quickSort(a, p, q - 1); 
-		quickSort(a, q + 1, r); 
-	} 
+			troca(&a[i], &a[j]);
+		}
+	}
+	troca(&a[i + 1], &a[r]);
+	return (i + 1);
 }
 
-void mostra(int a[], int TAM) { 
-	int i; 
-	for (i = 0; i < TAM; i++) 
-		cout << a[i] << " "; 
-	cout << endl; 
-} 
+void quickSort(int a[], int p, int r) {
+	if (p < r) {
+		int q = particiona(a, p, r);
 
-int main() { 
+		quickSort(a, p, q - 1);
+		quickSort(a, q + 1, r);
+	}
+}
+
+void mostra(int a[], int TAM) {
+	int i;
+	for (i = 0; i < TAM; i++)
+		cout << a[i] << " ";
+	cout << endl;
+}
+
+int main() {
 	//TIME
 	clock_t t;
 	double time_taken;
@@ -116,21 +116,22 @@ int main() {
 	int tamanho;
 	cout << "Qual é o tamanho do array: ";
 	cin >> tamanho;
-	
+
 	int vetor[tamanho];
 
 	srand (time(NULL));
-	
+
 	int opt;
 
 	do {
 
 		cout << "1 - Gera Array aleatório\n" <<
-				"2 - Gera Array Decrescente\n" << 
+				"2 - Gera Array Decrescente\n" <<
 				"3 - Gera Array Crescente\n" <<
 				"4 - Ordenação c/ checkout \n" <<
-				"5 - Ordenação s/ checkout\n" << 
+				"5 - Ordenação s/ checkout\n" <<
 				"6 - Pega dados do arquivo texto\n" <<
+				"7 - Mostrar\n" <<
 				"0 - Sair\n" <<
 				"Digite a opção desejada: ";
 		cin >> opt;
@@ -143,23 +144,23 @@ int main() {
 				* RANDOM ARRAY
 				*/
 				generateArrayRand(vetor, tamanho, tipo);
-				TAM = sizeof(vetor) / sizeof(vetor[0]); 
-				mostra(vetor, TAM);
+				TAM = sizeof(vetor) / sizeof(vetor[0]);
+				//mostra(vetor, TAM);
 				break;
 			case 2:
 				generateArrayDecresc(vetor, tamanho, tipo);
-				TAM = sizeof(vetor) / sizeof(vetor[0]); 
-				mostra(vetor, TAM); 
+				TAM = sizeof(vetor) / sizeof(vetor[0]);
+				//mostra(vetor, TAM);
 				break;
 			case 3:
 				generateArrayCresc(vetor, tamanho, tipo);
-				TAM = sizeof(vetor) / sizeof(vetor[0]); 
-				mostra(vetor, TAM); 
+				TAM = sizeof(vetor) / sizeof(vetor[0]);
+				//mostra(vetor, TAM);
 				break;
 			case 4:
 				t = clock();
 
-				quickSort(vetor, 0, TAM - 1); 
+				quickSort(vetor, 0, TAM - 1);
 
 				t = clock() - t;
 
@@ -173,7 +174,7 @@ int main() {
 				myfile << "---------------------------------------------------------\n";
 				myfile.close();
 
-				mostra(vetor, TAM); 
+				//mostra(vetor, TAM);
 
 				cout << "---------------------------------------------------------\n";
 				break;
@@ -181,8 +182,8 @@ int main() {
 				t = clock();
 
 				if(!isOrdened(vetor, TAM - 1)) { //Se bubble sorte não for usado quer dizer que não está em ordem
-					quickSort(vetor, 0, TAM - 1); 
-				}	
+					quickSort(vetor, 0, TAM - 1);
+				}
 
 				t = clock() - t;
 
@@ -196,15 +197,19 @@ int main() {
 				myfile << "---------------------------------------------------------\n";
 				myfile.close();
 
-				mostra(vetor, TAM); 
+				//mostra(vetor, TAM);
 
 				cout << "---------------------------------------------------------\n";
 				break;
 			case 6:
 				cout << "Não implementado";
+				break;
+            case 7:
+                mostra(vetor, TAM - 1);
+                break;
 			default:
 				cout << "Escolha uma opção correta";
-			
+
 		}
 	}while(true);
 
