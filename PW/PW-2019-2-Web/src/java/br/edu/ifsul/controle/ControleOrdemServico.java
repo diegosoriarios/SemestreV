@@ -2,11 +2,11 @@ package br.edu.ifsul.controle;
 
 import br.edu.ifsul.dao.EquipamentoDAO;
 import br.edu.ifsul.dao.OrdemServicoDAO;
-import br.edu.ifsul.dao.EstadoDAO;
 import br.edu.ifsul.dao.PessoaFisicaDAO;
 import br.edu.ifsul.dao.ProdutoDAO;
 import br.edu.ifsul.dao.ServicoDAO;
 import br.edu.ifsul.dao.UsuarioDAO;
+import br.edu.ifsul.modelo.ItemServico;
 import br.edu.ifsul.modelo.OrdemServico;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
@@ -37,6 +37,9 @@ public class ControleOrdemServico implements Serializable {
     private EquipamentoDAO equipamentoDAO;
     @EJB
     private ProdutoDAO produtoDAO;
+    
+    private ItemServico itemServico;
+    private Boolean novoItemServico;
     
     public ControleOrdemServico(){
         
@@ -79,6 +82,28 @@ public class ControleOrdemServico implements Serializable {
         } catch (Exception e){
             Util.mensagemErro("Erro ao persistir objeto: " + Util.getMensagemErro(e));
         }
+    }
+    
+    public void novoItemServico() {
+        itemServico = new ItemServico();
+        novoItemServico = true;
+    }
+    
+    public void alterarItemServico(int index) {
+        itemServico = objeto.getListaServicos().get(index);
+        novoItemServico = false;
+    }
+    
+    public void salvarItemServico() {
+        if (novoItemServico) {
+            objeto.adicionarServico(itemServico);
+        }
+        Util.mensagemInformacao("Serviço adicionado com sucesso!");
+    }
+    
+    public void removerItemServico(int index) {
+        objeto.removerServico(index);
+        Util.mensagemInformacao("Serviço removido com sucesso!");
     }
 
     public OrdemServicoDAO getDao() {
@@ -137,5 +162,22 @@ public class ControleOrdemServico implements Serializable {
         this.produtoDAO = produtoDAO;
     }
 
+    public ItemServico getItemServico() {
+        return itemServico;
+    }
 
+    public void setItemServico(ItemServico itemServico) {
+        this.itemServico = itemServico;
+    }
+
+    public Boolean getNovoItemServico() {
+        return novoItemServico;
+    }
+
+    public void setNovoItemServico(Boolean novoItemServico) {
+        this.novoItemServico = novoItemServico;
+    }
+
+    
+    
 }

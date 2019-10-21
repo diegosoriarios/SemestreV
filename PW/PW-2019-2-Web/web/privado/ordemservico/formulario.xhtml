@@ -24,7 +24,7 @@
                                         pattern="dd/MM/yyyy"
                                         navigator="true"
                                         size="10">
-                                <f:converter conveterId="converterCalendar" />
+                                <f:converter converterId="converterCalendar" />
                             </p:calendar>
                             
                             <p:outputLabel value="Data de Fechamento" for="txtDataFechamento" />
@@ -34,7 +34,7 @@
                                         pattern="dd/MM/yyyy"
                                         navigator="true"
                                         size="10">
-                                <f:converter conveterId="converterCalendar" />
+                                <f:converter converterId="converterCalendar" />
                             </p:calendar>
                             
                             <p:outputLabel value="Valor Total" for="txtValorTotal" />
@@ -44,7 +44,7 @@
                                            decimalPlaces="2" size="10" />
                             
                             <p:outputLabel value="Valor Serviços" for="txtValorServicos" />
-                            <p:inputNumber id="txtValorProdutos"
+                            <p:inputNumber id="txtValorServicos"
                                            value="#{controleOrdemServico.objeto.valorProdutos}"
                                            thousandSeparator="" decimalSeparator="."
                                            decimalPlaces="2" size="10" />
@@ -61,7 +61,7 @@
                             <p:outputLabel value="Forma de Pagamento" for="selectFormaPagamento" />
                             <p:selectOneMenu id="selectFormaPagamento" value="#{controleOrdemServico.objeto.formaPagamento}">
                                 <f:selectItem itemLabel="AVISTA" itemValue="AVISTA" />
-                                <f:selectItem itemLabem="APRAZO" itemValue="APRAZO" />
+                                <f:selectItem itemLabel="APRAZO" itemValue="APRAZO" />
                             </p:selectOneMenu>
                             
                             <p:outputLabel value="Quantidade de Parcelas" for="txtParcelas" />
@@ -75,7 +75,7 @@
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
                                 <f:converter binding="#{converterPessoaFisica}"/>
-                                <f:selectItems value="#{controleOrdemServico.daoPessoaFisica.listaTodos}"
+                                <f:selectItems value="#{controleOrdemServico.pessoaFisicaDAO.listaTodos}"
                                                var="pf" itemLabel="#{pf.nome}"/>
                             </p:selectOneMenu>
                             
@@ -85,7 +85,7 @@
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
                                 <f:converter binding="#{converterUsuario}"/>
-                                <f:selectItems value="#{controleOrdemServico.daoUsuario.listaTodos}"
+                                <f:selectItems value="#{controleOrdemServico.usuarioDAO.listaTodos}"
                                                var="u" itemLabel="#{u.nome}"/>
                             </p:selectOneMenu>
                             
@@ -95,7 +95,7 @@
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
                                 <f:converter binding="#{converterEquipamento}"/>
-                                <f:selectItems value="#{controleOrdemServico.daoEquipamento.listaTodos}"
+                                <f:selectItems value="#{controleOrdemServico.equipamentoDAO.listaTodos}"
                                                var="eqp" itemLabel="#{eqp.id} - #{eqp.descricao} - #{eqp.numeroSerie}" />
                             </p:selectOneMenu>
                         </p:panelGrid>
@@ -110,7 +110,58 @@
                     <p:textEditor widgetVar="editorDescricao" id="txtResolucaoProblema"
                                   value="#{controleOrdemServico.objeto.resolucaoProblema}"
                                   height="140" />
-                    
+                </p:tab>
+                
+                <p:tab title="Serviços">
+                    <p:dataTable value="#{controleOrdemServico.objeto.listaServicos}"
+                                 var="itemServico" rowIndexVar="idxItemServico"
+                                 id="listaItensServico">
+                        <f:facet name="header">
+                            <p:commandButton value="Novo Serviço"
+                                             actionListener="#{controleOrdemServico.novoItemServico()}"
+                                             update=":formItemServico" icon="pi pi-plus"
+                                             process="@this"
+                                             oncomplete="PF('dlgItemServico').show();" />
+                        </f:facet>
+                        <p:column headerText="ID">
+                            <p:outputLabel value="#{itemServico.id}" />
+                        </p:column>
+                        <p:column headerText="Servico">
+                            <p:outputLabel value="#{itemServico.servico.id}" />
+                        </p:column>
+                        <p:column headerText="Quantidade">
+                            <p:outputLabel value="#{itemServico.quantidade}" />
+                        </p:column>
+                        <p:column headerText="Valor Unitário">
+                            <p:outputLabel value="#{itemServico.valorUnitario}">
+                                <f:convertNumber pattern="R$ 0.00" />
+                            </p:outputLabel>
+                        </p:column>
+                        <p:column headerText="Valor Total">
+                            <p:outputLabel value="#{itemServico.valorTotal}">
+                                <f:convertNumber pattern="R$ 0.00" />
+                            </p:outputLabel>
+                        </p:column>
+                        
+                        <p:column headerText="Ações">
+                            <div align="center">
+                                <p:commandButton icon="pi pi-pencil"
+                                                 actionListener="#{controleOrdemServico.alterarItemServico(idxItemServico)}"
+                                                 update=":formItemServico" process="@this"
+                                                 oncomplete="PF('dlgItemServico').show();" />
+                                <p:commandButton icon="pi pi-trash"
+                                                 actionListener="#{controleOrdemServico.removerItemServico(idxItemServico)}"
+                                                 process="@this"
+                                                 update="tab:listaItensServico growl tab:txtValorTotal tab:txtValorServicos" 
+                                                 onclick="if (!confirm('Confirma a exclusão?')) return false" />
+                            </div>
+                        </p:column>
+                        
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="Produtos">
+                </p:tab>
+                <p:tab title="Parcelas">
                 </p:tab>
             </p:tabView>
             
@@ -126,6 +177,54 @@
             </p:panel>
         </h:form>
 
+    </p:dialog>
+    
+    <p:dialog header="Edição de Item de Serviço"
+              widgetVar="dlgItemServico"
+        resizable="false" modal="true">
+        
+        <h:form id="formItemServico">
+            <p:growl />
+            <p:panelGrid columns="2">
+                <f:facet name="footer">
+                    <div align="center">
+                        <p:commandButton value="Salvar"
+                                         actionListener="#{controleOrdemServico.salvarItemServico()}"
+                                         update="@form tab:listaItensServico tab:txtValorTotal
+                                         tab:txtValorServicos growl"
+                                         process="@form" 
+                                         oncomplete="if (!args.validationFailed){PF('dlgItemServico').hide();}" />
+                    </div>
+                </f:facet>
+                <p:outputLabel value="Serviço" for="selectServico" />
+                <p:selectOneMenu id="selectServico"
+                                 value="#{controleOrdemServico.itemServico.servico}"
+                                 filter="true" filterMatchMode="startsWith">
+                    <f:converter binding="converterServico" />
+                    <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro" />
+                    <f:selectItems value="#{controleOrdemServico.servicoDAO.listaTodos}" var="s"
+                                  itemLabel="#{s.nome}" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Quantidade" for="txtQuantidade" />
+                <p:inputNumber id="txtQuantidade" value="#{controleOrdemServico.itemServico.quantidade}"
+                               thousandSeparator="" decimalSeparator="" decimalPlaces="0"
+                               size="10" />
+                
+                <p:outputLabel value="Valor Unitário" for="txtValorUnitarioServico" />
+                <p:inputNumber id="txtValorUnitarioServico" value="#{controleOrdemServico.itemServico.valorUnitario}"
+                               thousandSeparator="" decimalSeparator="." decimalPlaces="2"
+                               size="10" />
+                
+                <p:outputLabel value="Valor Total" for="txtValorTotalServico" />
+                <p:inputNumber id="txtValorTotalServico" value="#{controleOrdemServico.itemServico.valorTotal}"
+                               thousandSeparator="" decimalSeparator="." decimalPlaces="2"
+                               size="10" />
+            </p:panelGrid>
+        </h:form>
+        
+        <ui:include src="/templates/ajaxstatus.xhtml" />
+        
     </p:dialog>
 </html>
 

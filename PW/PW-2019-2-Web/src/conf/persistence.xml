@@ -14,6 +14,8 @@
     <class>br.edu.ifsul.modelo.PessoaFisica</class>
     <class>br.edu.ifsul.modelo.Produto</class>
     <class>br.edu.ifsul.modelo.Usuario</class>
+    <class>br.edu.ifsul.modelo.ItemServico</class>
+    <class>br.edu.ifsul.modelo.Servico</class>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

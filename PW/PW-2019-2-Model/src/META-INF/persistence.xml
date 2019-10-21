@@ -13,6 +13,8 @@
     <class>br.edu.ifsul.modelo.PessoaFisica</class>
     <class>br.edu.ifsul.modelo.Produto</class>
     <class>br.edu.ifsul.modelo.Usuario</class>
+    <class>br.edu.ifsul.modelo.ItemServico</class>
+    <class>br.edu.ifsul.modelo.Servico</class>
     <properties>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
