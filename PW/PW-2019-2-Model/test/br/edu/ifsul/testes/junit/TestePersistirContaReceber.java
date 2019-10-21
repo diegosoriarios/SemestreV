@@ -16,7 +16,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Jorge
+ * @author Diego
  */
 public class TestePersistirContaReceber {
     
@@ -40,11 +40,11 @@ public class TestePersistirContaReceber {
     
     @Test
     public void teste(){
-        OrdemServico obj = em.find(OrdemServico.class, 4);
+        OrdemServico obj = em.find(OrdemServico.class, 6);
         obj.gerarParcelas();
         em.getTransaction().begin();
         em.persist(obj);
-        em.getTransaction().commit(); 
+        em.getTransaction().commit();        
     }
     
 }

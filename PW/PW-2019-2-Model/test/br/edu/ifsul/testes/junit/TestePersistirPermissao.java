@@ -13,8 +13,8 @@ import org.junit.Test;
 
 /**
  *
- * @author Prof. Me. Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
  * @organization IFSUL - Campus Passo Fundo
  */
 public class TestePersistirPermissao {

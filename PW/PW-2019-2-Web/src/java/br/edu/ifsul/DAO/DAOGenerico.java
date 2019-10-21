@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.edu.ifsul.DAO;
+package br.edu.ifsul.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,15 +8,17 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 public class DAOGenerico<TIPO> implements Serializable {
     
-    private List<TIPO> listaObjetos; //retorna uma consulta paginada
-    private List<TIPO> listaTodos; //retorna todos os registros
+    private List<TIPO> listaObjetos; // retorna uma consulta paginada (2º etapa)
+    private List<TIPO> listaTodos; // retorna todos os registros
     @PersistenceContext(unitName = "PW-2019-2-WebPU")
     protected EntityManager em;
-    protected Class classePersistente;
+    protected Class classePersistente; // classe que a instância do dao está utilizando
     protected String filtro = "";
     protected List<Ordem> listaOrdem = new ArrayList<>();
     protected Ordem ordemAtual;
@@ -29,89 +26,84 @@ public class DAOGenerico<TIPO> implements Serializable {
     protected Integer maximoObjetos = 8;
     protected Integer posicaoAtual = 0;
     protected Integer totalObjetos = 0;
+    
+    public DAOGenerico(){
+        
+    }
 
     public List<TIPO> getListaObjetos() {
         String jpql = "from " + classePersistente.getSimpleName();
-        
         String where = "";
-        
+        // proteger o filtro contra injeção de sql 
         filtro = filtro.replaceAll("[';-]", "");
-        
-        if (filtro.length() > 0) {
+        if (filtro.length() > 0){
             switch (ordemAtual.getOperador()) {
                 case "=" :
-                    if (ordemAtual.getAtributo().equals("id")) {
+                    // tratar para não dar erro quando for id
+                    if (ordemAtual.getAtributo().equals("id")){
                         try {
                             Integer.parseInt(filtro);
-                        } catch (Exception e) {
+                        } catch (Exception e){
                             filtro = "0";
-                        }
+                        }                        
                     }
-                    
                     where += " where " + ordemAtual.getAtributo() + " = '" + filtro + "' ";
                     break;
-                
-                case "like":
-                    where += " where upper(" + ordemAtual.getAtributo() + ") like '" +
+                case "like" :
+                    where += " where upper(" + ordemAtual.getAtributo() + ") like '" + 
                             filtro.toUpperCase() + "%' ";
             }
         }
-        
         jpql += where;
         jpql += " order by " + ordemAtual.getAtributo();
-        
         totalObjetos = em.createQuery(jpql).getResultList().size();
-        
-        return em.createQuery(jpql).setFirstResult(posicaoAtual).setMaxResults(maximoObjetos).getResultList();
+        return em.createQuery(jpql).
+                setFirstResult(posicaoAtual).setMaxResults(maximoObjetos).getResultList();
     }
     
-    public void primeiro() {
+    public void primeiro(){
         posicaoAtual = 0;
     }
     
-    public void anterior() {
+    public void anterior(){
         posicaoAtual -= maximoObjetos;
-        if (posicaoAtual < 0) {
+        if (posicaoAtual < 0){
             posicaoAtual = 0;
         }
     }
     
-    public void proximo() {
-        if (posicaoAtual + maximoObjetos < totalObjetos) {
-            posicaoAtual = maximoObjetos;
+    public void proximo(){
+        if (posicaoAtual + maximoObjetos < totalObjetos){
+            posicaoAtual += maximoObjetos;
         }
     }
     
-    public void ultimo() {
+    public void ultimo(){
         int resto = totalObjetos % maximoObjetos;
-        if (resto > 0) {
+        if (resto > 0){
             posicaoAtual = totalObjetos - resto;
         } else {
             posicaoAtual = totalObjetos - maximoObjetos;
         }
     }
     
-    public String getMensagemNavegacao() {
+    public String getMensagemNavegacao(){
         int ate = posicaoAtual + maximoObjetos;
         if (ate > totalObjetos) {
             ate = totalObjetos;
         }
-        
-        if (totalObjetos > 0) {
-            return "Listando de " + (posicaoAtual + 1) + " até " + ate + " de " + totalObjetos + " registros";
+        if (totalObjetos > 0){
+            return "Listando de " + (posicaoAtual + 1) + " até " + 
+                    ate + " de " + totalObjetos + " registros";
         } else {
-            return "Nenhum registro encontrado";
+            return "Nenhum resgistro encontrado";
         }
     }
-
-    public void setListaObjetos(List<TIPO> listaObjetos) {
-        this.listaObjetos = listaObjetos;
-    }
-
+    
     public List<TIPO> getListaTodos() {
         String jpql = "from " + classePersistente.getSimpleName() + " order by " + ordemAtual.getAtributo();
         return em.createQuery(jpql).getResultList();
-    }
+    }    
     
     public void persist(TIPO obj) throws Exception {
         em.persist(obj);
@@ -126,9 +118,15 @@ public class DAOGenerico<TIPO> implements Serializable {
         em.remove(obj);
     }
     
-    public TIPO getObjectById(Object id) {
+    public TIPO getObjectById(Object id){
         return (TIPO) em.find(classePersistente, id);
     }
+
+    public void setListaObjetos(List<TIPO> listaObjetos) {
+        this.listaObjetos = listaObjetos;
+    }
+
+
 
     public void setListaTodos(List<TIPO> listaTodos) {
         this.listaTodos = listaTodos;
@@ -205,7 +203,5 @@ public class DAOGenerico<TIPO> implements Serializable {
     public void setTotalObjetos(Integer totalObjetos) {
         this.totalObjetos = totalObjetos;
     }
-    
-    
-    
+
 }

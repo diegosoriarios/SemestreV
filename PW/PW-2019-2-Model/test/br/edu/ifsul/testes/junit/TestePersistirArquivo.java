@@ -20,8 +20,8 @@ import org.junit.Test;
 
 /**
  *
- * @author Prof. Me. Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
  * @organization IFSUL - Campus Passo Fundo
  */
 public class TestePersistirArquivo {
@@ -53,9 +53,9 @@ public class TestePersistirArquivo {
             a.setNomeArquivo("manual_iwr_3000_portugues_01-18_site_0.pdf");
             a.setDescricao("Manual");
             Path path = 
-                    Paths.get("/home/jorge/Downloads/manual_iwr_3000_portugues_01-18_site_0.pdf");
+                    Paths.get("/home/Diego/Downloads/manual_iwr_3000_portugues_01-18_site_0.pdf");
             // No Windows Escreve-se desta maneira
-            //Paths.get("c:\\home\\jorge\\Downloads\\manual_iwr_3000_portugues_01-18_site_0.pdf");
+            //Paths.get("c:\\home\\Diego\\Downloads\\manual_iwr_3000_portugues_01-18_site_0.pdf");
             a.setArquivo(Files.readAllBytes(path));
             p1.adicionarArquivo(a);
             

@@ -9,74 +9,60 @@
         <ui:define name="titulo">CRUD de Cidades</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem" prependId="false">
-                <p:growl />
-                <p:commandButton value="Novo" 
-                                 actionListener="#{controleCidade.novo()}"
+                <p:growl/>
+                <p:commandButton value="Novo" actionListener="#{controleCidade.novo()}"
                                  icon="pi pi-plus"
-                                 update="formEdicao" 
-                                 process="@this"
-                                 oncomplete="PF('dlg').show();" />
-                
+                                 update="formEdicao"
+                                 process="@form"
+                                 oncomplete="PF('dlg').show();"/>
                 <div align="center">
                     <p:panelGrid columns="11">
-                        <p:outputLabel value="Ordem: "/>
+                        <p:outputLabel value="Ordem:"/>
                         <p:selectOneMenu value="#{controleCidade.dao.ordemAtual}"
                                          id="selectOrdem"
                                          converter="#{controleCidade.dao.converterOrdem}">
                             <f:selectItems value="#{controleCidade.dao.listaOrdem}"
-                                           var="ord" itemValue="#{ord.atributo}" />
-                            
-                            <p:ajax update="listagem" />
+                                           var="ord" itemValue="#{ord.atributo}"/>
+                            <p:ajax update="listagem"/>
                         </p:selectOneMenu>
-                        
-                        <p:outputLabel value="Filtro: "/>
+                        <p:outputLabel value="Filtro:"/>
                         <p:inputText value="#{controleCidade.dao.filtro}">
-                            <p:ajax update="listagem" event="blur" />
+                            <p:ajax update="listagem" event="blur"/>
                         </p:inputText>
-                        
-                        <p:commandButton value="Filtrar" update="listagem" />
-                        
-                        <p:outputLabel value="Máximo de objetos:" />
+                        <p:commandButton value="Filtrar" update="listagem"/>
+                        <p:outputLabel value="Máximo de objetos:"/>
                         <p:inputNumber value="#{controleCidade.dao.maximoObjetos}"
-                                       size="3" thousandSeparator="" decimalSeparator=""
-                                       decimalPlaces="0">
-                            <p:ajax update="listagem" event="blur" />
+                                       size="3" thousandSeparator="" decimalPlaces="0" 
+                                       decimalSeparator="">
+                            <p:ajax update="listagem" event="blur"/>
                         </p:inputNumber>
-                        
                         <p:commandButton action="#{controleCidade.dao.primeiro()}"
                                          title="Primeiro" update="listagem"
-                                         icon="pi pi-step-backward" />
-                        
+                                         icon="pi pi-step-backward"/>
                         <p:commandButton action="#{controleCidade.dao.anterior()}"
                                          title="Anterior" update="listagem"
-                                         icon="pi pi-chevron-left" />
-                        
+                                         icon="pi pi-chevron-left"/>     
                         <p:commandButton action="#{controleCidade.dao.proximo()}"
-                                         title="Próximo" update="listagem"
-                                         icon="pi pi-chevron-right" />
-                        
+                                         title="Proximo" update="listagem"
+                                         icon="pi pi-chevron-right"/>    
                         <p:commandButton action="#{controleCidade.dao.ultimo()}"
-                                         title="Último" update="listagem"
-                                         icon="pi pi-step-forward" />
-                        
-                    </p:panelGrid>
+                                         title="Ultimo" update="listagem"
+                                         icon="pi pi-step-forward"/>                                                   
+                    </p:panelGrid> 
                 </div>
-                
                 <p:dataTable value="#{controleCidade.dao.listaObjetos}" var="obj" id="listagem">
-                    
                     <f:facet name="footer">
-                        <p:outputLabel value="#{controleCidade.dao.mensagemNavegacao}" />
+                        <p:outputLabel value="#{controleCidade.dao.mensagemNavegacao}"/>
                     </f:facet>
-                    
                     <p:column headerText="ID">
-                        <p:outputLabel value="#{obj.id}" />
+                        <p:outputLabel value="#{obj.id}"/>
                     </p:column>
                     <p:column headerText="Nome">
-                        <p:outputLabel value="#{obj.nome}" />
+                        <p:outputLabel value="#{obj.nome}"/>
                     </p:column>
                     <p:column headerText="Estado">
-                        <p:outputLabel value="#{obj.estado.nome}" />
-                    </p:column>
+                        <p:outputLabel value="#{obj.estado.nome}"/>
+                    </p:column>  
                     <p:column headerText="Ações">
                         <div align="center">
                             <p:commandButton actionListener="#{controleCidade.alterar(obj.id)}"
@@ -84,13 +70,13 @@
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
-                                             oncomplete="PF('dlg').show();" />
+                                             oncomplete="PF('dlg').show();"/>
                             <p:commandButton actionListener="#{controleCidade.remover(obj.id)}"
                                              icon="pi pi-trash"
                                              title="Remover"
                                              update="@form"
                                              process="@this"
-                                             onclick="if (!confirm('Confirma a exclusão?')) return false" />
+                                             onclick="if (!confirm('Confirma a exclusão?')) return false"/>
                         </div>
                     </p:column>
                 </p:dataTable>
@@ -98,28 +84,22 @@
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
                 modal="true" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
-                    <p:growl id="growl" />
+                    <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleCidade.objeto.id}" 
-                                         readonly="true" 
-                                         size="5" />
-                            
-                            <p:outputLabel value="Nome" for="txtNome" />
-                            <p:inputText id="txtNome" 
-                                         value="#{controleCidade.objeto.nome}"
-                                         size="50" maxlength="50" 
-                                         placeholder="Obrigatório"/>
-                           
-                            <p:outputLabel value="Estado" for="selectEstado" />
+                            <p:inputText value="#{controleCidade.objeto.id}" readonly="true" size="5"/>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText id="txtNome" value="#{controleCidade.objeto.nome}"
+                                         size="50" maxlength="50" placeholder="Obrigatório"/>
+                            <p:outputLabel value="Estado" for="selectEstado"/>
                             <p:selectOneMenu id="selectEstado" value="#{controleCidade.objeto.estado}"
-                                             filter="true" filterMatchMode="startsWith" >
+                                             filter="true" filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione um registro"
-                                              noSelectionOption="true" />
-                                <f:converter binding="#{converteEstado}" />
+                                              noSelectionOption="true"/>
+                                <f:converter binding="#{converterEstado}"/>
                                 <f:selectItems value="#{controleCidade.daoEstado.listaTodos}"
-                                               var="est" itemLabel="#{est.nome}" />
+                                               var="est" itemLabel="#{est.nome}"/>
                             </p:selectOneMenu>
                         </p:panelGrid>
                     </div>
@@ -130,10 +110,11 @@
                                              icon="pi pi-save"
                                              update="formEdicao formListagem"
                                              process="@form"
-                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}" />
+                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
                         </div>
                     </p:panel>
                 </h:form>
+                   
             </p:dialog>
         </ui:define>
     </ui:composition>

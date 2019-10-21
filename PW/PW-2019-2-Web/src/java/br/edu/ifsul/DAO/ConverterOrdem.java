@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.edu.ifsul.DAO;
+package br.edu.ifsul.dao;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,38 +9,36 @@ import javax.faces.convert.FacesConverter;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 @FacesConverter(value = "converterOrdem")
 public class ConverterOrdem implements Serializable, Converter{
-    
+
     private List<Ordem> listaOrdem;
 
     public ConverterOrdem(List<Ordem> listaOrdem) {
         this.listaOrdem = listaOrdem;
     }
-    
+            
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
         Ordem retorno = null;
-        for (Ordem o: listaOrdem) {
-            if (o.getAtributo().equals(string)) {
+        for (Ordem o : listaOrdem){
+            if (o.getAtributo().equals(string)){
                 retorno = o;
             }
         }
-        
         return retorno;
     }
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object t) {
-        if (t == null) {
+        if (t == null){
             return null;
         }
-        
-        Ordem o = (Ordem) t;
-        
-        return o.getAtributo();
+        return t.toString();
     }
 
     public List<Ordem> getListaOrdem() {
@@ -55,8 +48,5 @@ public class ConverterOrdem implements Serializable, Converter{
     public void setListaOrdem(List<Ordem> listaOrdem) {
         this.listaOrdem = listaOrdem;
     }
-    
-    
-    
-    
+
 }

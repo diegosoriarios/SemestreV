@@ -14,8 +14,8 @@ import org.junit.Test;
 
 /**
  *
- * @author Prof. Me. Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
  * @organization IFSUL - Campus Passo Fundo
  */
 public class TestePersistirPermissaoUsuario {
@@ -42,7 +42,7 @@ public class TestePersistirPermissaoUsuario {
     public void teste(){
         boolean exception = false;
         try {
-            Usuario u = em.find(Usuario.class, "diegosoriarios");   
+            Usuario u = em.find(Usuario.class, "Diego");   
             
             Permissao p1 = em.find(Permissao.class,"ADMINISTRADOR");
             

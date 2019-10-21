@@ -23,8 +23,13 @@
                                         ajax="false"/>
                             <p:menuitem action="#{controleCidade.listar()}"
                                         value="Manutenção de Cidades"
-                                        ajax="false"/>
-                        </p:submenu>                        
+                                        ajax="false"/>                            
+                        </p:submenu>
+                        <p:submenu label="Negócios">
+                            <p:menuitem action="#{controleOrdemServico.listar()}"
+                                        value="Manutenção Ordem de Serviços"
+                                        ajax="false" />
+                        </p:submenu>
                     </p:column>
                 </p:submenu>
             </p:megaMenu>
@@ -36,3 +41,4 @@
         <ui:include src="ajaxstatus.xhtml"/>        
     </h:body>
 </html>
+

@@ -16,7 +16,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Jorge
+ * @author Diego
  */
 public class TestePersistirOrdemServico {
     
@@ -41,14 +41,16 @@ public class TestePersistirOrdemServico {
     @Test
     public void teste(){
         OrdemServico obj = new OrdemServico();
-        obj.setDataAbertura(Calendar.getInstance());
+        obj.setDataAbertura(Calendar.getInstance());        
         obj.setDataFechamento(Calendar.getInstance());
-        obj.setDescricaoProblema("Windows com virus");
-        obj.setEquipamento(em.find(Equipamento.class, 3));
-        obj.setFormaPagamento(FormaPagamento.APRAZO);
-        obj.setPessoaFisica(em.find(PessoaFisica.class, "diegosoriariospf"));
+        obj.setDescricaoProblema("Windows com virus");        
+        obj.setEquipamento(em.find(Equipamento.class, 2));
+        obj.setFormaPagamento(FormaPagamento.AVISTA);
+        obj.setPessoaFisica(em.find(PessoaFisica.class, "diegosoriariospf"));        
         obj.setResolucaoProblema("Formatação");
-        obj.setStatus(Status.ABERTA);
+        obj.setStatus(Status.FECHADA);
+        obj.setValorTotal(300.00);
+        obj.setQuantidadeParcelas(3);
         obj.setUsuario(em.find(Usuario.class, "diegosoriarios"));        
         em.getTransaction().begin();
         em.persist(obj);

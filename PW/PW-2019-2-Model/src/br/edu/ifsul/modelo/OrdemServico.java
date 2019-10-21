@@ -23,12 +23,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * @author Prof. Me. Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
  * @organization IFSUL - Campus Passo Fundo
  */
 @Entity
@@ -39,75 +38,66 @@ public class OrdemServico implements Serializable {
     @SequenceGenerator(name = "seq_ordem_servico", sequenceName = "seq_ordem_servico_id", allocationSize = 1)
     @GeneratedValue(generator = "seq_ordem_servico", strategy = GenerationType.SEQUENCE)
     private Integer id;
-    
     @NotNull(message = "A data de abertura não pode ser nula")
     @Temporal(TemporalType.DATE)
     @Column(name = "data_abertura", nullable = false)
     private Calendar dataAbertura;
-    
     @Temporal(TemporalType.DATE)
     @Column(name = "data_fechamento", nullable = false)
     private Calendar dataFechamento;
-    
     @NotNull(message = "A descrição do problema não pode ser nula")
     @NotBlank(message = "A descrição do problema não pode ser em branco")
     @Column(name = "descricao_problema", columnDefinition = "text", nullable = false)
     private String descricaoProblema;
-    
     @Column(name = "resolucao_problema", columnDefinition = "text")
     private String resolucaoProblema;
-    
     @Min(message = "O valor dos produtos não pode ser negativo", value = 0)
     @NotNull(message = "O valor dos produtos deve ser informado")
     @Column(name = "valor_produtos", nullable = false, columnDefinition = "numeric(12,2)")
     private Double valorProdutos;
-    
     @Min(message = "O valor dos serviços não pode ser negativo", value = 0)
     @NotNull(message = "O valor dos serviços deve ser informado")
     @Column(name = "valor_servicos", nullable = false, columnDefinition = "numeric(12,2)")
     private Double valorServicos;
-    
     @Min(message = "O valor total não pode ser negativo", value = 0)
     @NotNull(message = "O valor total deve ser informado")
     @Column(name = "valor_total", nullable = false, columnDefinition = "numeric(12,2)")
     private Double valorTotal;
-    
     @NotNull(message = "O status deve ser informado")
     @Column(name = "status", nullable = false, length = 15)
     @Enumerated(EnumType.STRING)
     private Status status;
-    
     @NotNull(message = "A forma de pagamento deve ser informada")
     @Column(name = "forma_pagamento", nullable = false, length = 6)
     @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
-    
     @NotNull(message = "A quantidade de parcelas deve ser informada")
     @Min(message = "O valor dos produtos não pode ser negativo", value = 0)
     @Column(name = "quantidade_parcelas", nullable = false)
     private Integer quantidadeParcelas;
-    
     @NotNull(message = "A pessoa física deve ser informada")
     @ManyToOne
     @JoinColumn(name = "pessoa_fisica", referencedColumnName = "nome_usuario", nullable = false,
             foreignKey = @ForeignKey(name = "fk_ordem_servico_pf"))
     private PessoaFisica pessoaFisica;
-    
     @NotNull(message = "O usuário deve ser informado")
     @ManyToOne
     @JoinColumn(name = "usuario", referencedColumnName = "nome_usuario", nullable = false,
             foreignKey = @ForeignKey(name = "fk_ordem_servico_usuario"))
     private Usuario usuario;
-    
     @NotNull(message = "O equipamento deve ser informado")
     @ManyToOne
     @JoinColumn(name = "equipamento", referencedColumnName = "id", nullable = false,
             foreignKey = @ForeignKey(name = "fk_ordem_servico_equipamento"))
     private Equipamento equipamento;
     
-    @OneToMany(mappedBy = "id.ordemServico", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "id.ordemServico", fetch = FetchType.LAZY, 
             orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ContaReceber> contasReceber = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ItemServico> listaServicos = new ArrayList<>();    
 
     public OrdemServico() {
         valorProdutos = 0.0;
@@ -116,7 +106,25 @@ public class OrdemServico implements Serializable {
         quantidadeParcelas = 0;
     }
     
-    public void gerarParcelas() {
+    public void atualizaValorTotal() {
+        this.valorTotal = this.valorProdutos + this.valorServicos;
+    }    
+    
+    public void adicionarServico(ItemServico obj) {
+        valorServicos += obj.getValorTotal();
+        obj.setOrdemServico(this);
+        this.listaServicos.add(obj);
+        atualizaValorTotal();
+    }
+
+    public void removerServico(int index) {
+        ItemServico obj = this.listaServicos.get(index);
+        valorServicos -= obj.getValorTotal();
+        atualizaValorTotal();
+        this.listaServicos.remove(index);
+    }    
+    
+    public void gerarParcelas(){
         if (this.formaPagamento == FormaPagamento.AVISTA) {
             ContaReceber conta = new ContaReceber();
             conta.setValor(this.valorTotal);
@@ -127,13 +135,12 @@ public class OrdemServico implements Serializable {
             id.setNumeroParcela(1);
             id.setOrdemServico(this);
             conta.setId(id);
-            this.contasReceber.add(conta);
-        } else if (this.formaPagamento == FormaPagamento.APRAZO) {
+            this.contasReceber.add(conta);            
+        } else if (this.formaPagamento == FormaPagamento.APRAZO){
             Double valorParcela = this.valorTotal / this.quantidadeParcelas;
-            for(int i = 1; i <= this.quantidadeParcelas; i++) {
+            for (int i = 1; i <= this.quantidadeParcelas; i++){
                 ContaReceber conta = new ContaReceber();
                 conta.setValor(valorParcela);
-                conta.setVencimento(dataFechamento);
                 Calendar vencimento = (Calendar) this.dataFechamento.clone();
                 vencimento.add(Calendar.MONTH, i);
                 conta.setVencimento(vencimento);
@@ -142,7 +149,7 @@ public class OrdemServico implements Serializable {
                 id.setOrdemServico(this);
                 conta.setId(id);
                 this.contasReceber.add(conta);
-            }
+            }                        
         }
     }
 
@@ -265,7 +272,13 @@ public class OrdemServico implements Serializable {
     public void setContasReceber(List<ContaReceber> contasReceber) {
         this.contasReceber = contasReceber;
     }
-    
-    
+
+    public List<ItemServico> getListaServicos() {
+        return listaServicos;
+    }
+
+    public void setListaServicos(List<ItemServico> listaServicos) {
+        this.listaServicos = listaServicos;
+    }
  
 }

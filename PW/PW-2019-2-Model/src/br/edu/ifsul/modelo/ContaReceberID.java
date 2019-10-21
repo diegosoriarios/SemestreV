@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
@@ -16,10 +11,13 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 @Embeddable
 public class ContaReceberID implements Serializable {
+
     @NotNull(message = "O numero da parcela deve ser informada")
     @Column(name = "numero_parcela", nullable = false)
     private Integer numeroParcela;
@@ -28,10 +26,11 @@ public class ContaReceberID implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ordem_servico", nullable = false, referencedColumnName = "id")
     private OrdemServico ordemServico;
-
-    public ContaReceberID() {
-    }
     
+    public ContaReceberID(){
+        
+    }
+
     public Integer getNumeroParcela() {
         return numeroParcela;
     }
@@ -50,9 +49,9 @@ public class ContaReceberID implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.numeroParcela);
-        hash = 23 * hash + Objects.hashCode(this.ordemServico);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.numeroParcela);
+        hash = 97 * hash + Objects.hashCode(this.ordemServico);
         return hash;
     }
 
@@ -76,6 +75,7 @@ public class ContaReceberID implements Serializable {
         }
         return true;
     }
+    
     
     
 }

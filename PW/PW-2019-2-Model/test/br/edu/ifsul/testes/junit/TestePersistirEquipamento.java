@@ -11,7 +11,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Jorge
+ * @author Diego
  */
 public class TestePersistirEquipamento {
     

@@ -8,23 +8,22 @@
         <ui:define name="titulo">CRUD de Estados</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem" prependId="false">
-                <p:growl />
-                <p:commandButton value="Novo" 
-                                 actionListener="#{controleEstado.novo()}"
+                <p:growl/>
+                <p:commandButton value="Novo" actionListener="#{controleEstado.novo()}"
                                  icon="pi pi-plus"
-                                 update="formEdicao" 
-                                 process="@this"
-                                 oncomplete="PF('dlg').show();" />
-                <p:dataTable value="#{controleEstado.dao.listaObjetos}" var="obj">
+                                 update="formEdicao"
+                                 process="@form"
+                                 oncomplete="PF('dlg').show();"/>
+                <p:dataTable value="#{controleEstado.dao.listaObjetos}" var="obj" id="listagem">
                     <p:column headerText="ID">
-                        <p:outputLabel value="#{obj.id}" />
+                        <p:outputLabel value="#{obj.id}"/>
                     </p:column>
                     <p:column headerText="Nome">
-                        <p:outputLabel value="#{obj.nome}" />
+                        <p:outputLabel value="#{obj.nome}"/>
                     </p:column>
                     <p:column headerText="UF">
-                        <p:outputLabel value="#{obj.uf}" />
-                    </p:column>
+                        <p:outputLabel value="#{obj.uf}"/>
+                    </p:column>  
                     <p:column headerText="Ações">
                         <div align="center">
                             <p:commandButton actionListener="#{controleEstado.alterar(obj.id)}"
@@ -32,13 +31,13 @@
                                              title="Editar"
                                              update="formEdicao"
                                              process="@this"
-                                             oncomplete="PF('dlg').show();" />
+                                             oncomplete="PF('dlg').show();"/>
                             <p:commandButton actionListener="#{controleEstado.remover(obj.id)}"
                                              icon="pi pi-trash"
                                              title="Remover"
                                              update="@form"
                                              process="@this"
-                                             onclick="if (!confirm('Confirma a exclusão?')) return false" />
+                                             onclick="if (!confirm('Confirma a exclusão?')) return false"/>
                         </div>
                     </p:column>
                 </p:dataTable>
@@ -46,23 +45,17 @@
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
                 modal="true" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
-                    <p:growl id="growl" />
+                    <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleEstado.objeto.id}" 
-                                         readonly="true" 
-                                         size="5" />
-                            
-                            <p:outputLabel value="Nome" for="txtNome" />
-                            <p:inputText id="txtNome" 
-                                         value="#{controleEstado.objeto.nome}"
-                                         size="50" maxlength="50" 
-                                         placeholder="Obrigatório"/>
-                           
-                            <p:outputLabel value="UF" for="txtUF" />
+                            <p:inputText value="#{controleEstado.objeto.id}" readonly="true" size="5"/>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText id="txtNome" value="#{controleEstado.objeto.nome}"
+                                         size="50" maxlength="50" placeholder="Obrigatório"/>
+                            <p:outputLabel value="UF" for="txtUF"/>
                             <p:inputText id="txtUF" value="#{controleEstado.objeto.uf}"
-                                         size="3" maxlength="2" />
+                                         size="3" maxlength="2"/>
                         </p:panelGrid>
                     </div>
                     <p:panel>
@@ -72,10 +65,11 @@
                                              icon="pi pi-save"
                                              update="formEdicao formListagem"
                                              process="@form"
-                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}" />
+                                             oncomplete="if(!args.validationFailed){PF('dlg').hide();}"/>
                         </div>
                     </p:panel>
                 </h:form>
+                   
             </p:dialog>
         </ui:define>
     </ui:composition>

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.edu.ifsul.DAO;
+package br.edu.ifsul.dao;
 
 import br.edu.ifsul.modelo.Estado;
 import java.io.Serializable;
@@ -11,20 +6,23 @@ import javax.ejb.Stateful;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 @Stateful
-public class EstadoDAO extends DAOGenerico<Estado> implements Serializable{
-    public EstadoDAO() {
+public class EstadoDAO extends DAOGenerico<Estado> implements Serializable {
+    
+    public EstadoDAO(){
         super();
         classePersistente = Estado.class;
-        
+        // adicionar as ordenações possiveis
         listaOrdem.add(new Ordem("id", "ID", "="));
         listaOrdem.add(new Ordem("nome", "Nome", "like"));
-        listaOrdem.add(new Ordem("estado.nome", "Estado", "like"));
-        
+        // definir a ordem padrão
         ordemAtual = listaOrdem.get(1);
-        
-        converterOrdem = new ConverterOrdem(listaOrdem);
+        // inicalizar o conversor com a lista de ordens
+        converterOrdem = new ConverterOrdem(listaOrdem);        
     }
+
 }

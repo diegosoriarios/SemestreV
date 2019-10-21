@@ -9,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
- * @author Prof. Me. Jorge Luis Boeira Bavaresco
- * @email jorge.bavaresco@passofundo.ifsul.edu.br
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
  * @organization IFSUL - Campus Passo Fundo
  */
 @Entity
@@ -25,8 +27,12 @@ public class Estado implements Serializable {
             allocationSize = 1)
     @GeneratedValue(generator = "seq_estado", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    @NotBlank(message = "O nome não pode ser branco")
+    @Length(max = 50, message = "O nome não pode ter mais que {max} caracteres")    
     @Column(name = "nome", length = 50, nullable = false)
     private String nome;
+    @NotBlank(message = "A UF não pode ser branco")
+    @Length(max = 2, message = "A UF não pode ter mais que {max} caracteres")    
     @Column(name = "uf", length = 2, nullable = false)
     private String uf;
     

@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package br.edu.ifsul.DAO;
+package br.edu.ifsul.dao;
 
 import java.io.Serializable;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
-public class Ordem implements Serializable{
+public class Ordem implements Serializable {
     
     private String atributo;
     private String label;
@@ -22,11 +19,17 @@ public class Ordem implements Serializable{
         this.label = label;
         this.operador = operador;
     }
+    
+    public Ordem(){
+        
+    }
 
     @Override
     public String toString() {
-        return label;    
+        return label;
     }
+    
+    
 
     public String getAtributo() {
         return atributo;
@@ -51,7 +54,5 @@ public class Ordem implements Serializable{
     public void setOperador(String operador) {
         this.operador = operador;
     }
-    
-    
-    
+
 }

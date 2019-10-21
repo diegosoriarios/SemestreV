@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.modelo;
 
 import java.io.Serializable;
@@ -19,7 +14,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 @Entity
 @Table(name = "conta_receber")
@@ -30,7 +27,7 @@ public class ContaReceber implements Serializable {
     
     @Min(value = 0, message = "O valor não pode ser negativo")
     @NotNull(message = "O valor deve ser informado")
-    @Column(name = "valor", nullable = false, columnDefinition = "numeric(12, 2)")
+    @Column(name = "valor", nullable = false, columnDefinition = "numeric(12,2)")
     private Double valor;
     
     @NotNull(message = "O vencimento deve ser informado")
@@ -39,15 +36,15 @@ public class ContaReceber implements Serializable {
     private Calendar vencimento;
     
     @Min(value = 0, message = "O valor não pode ser negativo")
-    @NotNull(message = "O valor deve ser informado")
-    @Column(name = "valor_pagamento", columnDefinition = "numeric(12, 2)")
+    @Column(name = "valor_pagamento", columnDefinition = "numeric(12,2)")    
     private Double valorPagamento;
-    
+        
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_pagamento")
+    @Column(name = "data_pagamento")    
     private Calendar dataPagamento;
-
-    public ContaReceber() {
+    
+    public ContaReceber(){
+        
     }
 
     public ContaReceberID getId() {
@@ -81,19 +78,19 @@ public class ContaReceber implements Serializable {
     public void setValorPagamento(Double valorPagamento) {
         this.valorPagamento = valorPagamento;
     }
-    
+
     public Calendar getDataPagamento() {
-       return dataPagamento; 
+        return dataPagamento;
     }
-    
+
     public void setDataPagamento(Calendar dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -114,6 +111,7 @@ public class ContaReceber implements Serializable {
         }
         return true;
     }
+
     
     
 }

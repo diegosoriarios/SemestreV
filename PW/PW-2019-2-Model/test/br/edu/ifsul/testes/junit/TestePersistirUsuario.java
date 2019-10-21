@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.testes.junit;
 
 import br.edu.ifsul.modelo.Cidade;
@@ -15,26 +10,27 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 public class TestePersistirUsuario {
-    
+
     public TestePersistirUsuario() {
     }
     
     EntityManagerFactory emf = null;
     EntityManager em = null;
-    
+
     @Before
     public void setUp() {
         emf = Persistence.createEntityManagerFactory("PW-2019-2-ModelPU");
         em = emf.createEntityManager();
     }
-    
+
     @After
     public void tearDown() {
         em.close();
@@ -42,23 +38,24 @@ public class TestePersistirUsuario {
     }
     
     @Test
-    public void teste() {
+    public void teste(){
         boolean exception = false;
         try {
-            Usuario user = new Usuario();
-            user.setNomeUsuario("diegosoriarios");
-            user.setEmail("diegosoriarios@gmail.com");
-            user.setNome("Diego Soria Rios");
-            user.setSenha("123456");
-            user.setTelefonePrincipal("54 991907331");
+            Usuario obj = new Usuario();
+            obj.setEmail("diegosoriarios@gmail.com");
+            obj.setNome("Diego");
+            obj.setNomeUsuario("diegosoriarios");
+            obj.setSenha("123456");
+            obj.setTelefoneAlternativo("(54)89387-9876");
+            obj.setTelefonePrincipal("(54)98773-0987");
             em.getTransaction().begin();
-            em.persist(user);
+            em.persist(obj);
             em.getTransaction().commit();
-        } catch(Exception e) {
+        } catch (Exception e){
             exception = true;
             e.printStackTrace();
         }
-        
         Assert.assertEquals(false, exception);
     }
+
 }

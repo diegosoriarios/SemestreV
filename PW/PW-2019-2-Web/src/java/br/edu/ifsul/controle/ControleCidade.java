@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.DAO.CidadeDAO;
-import br.edu.ifsul.DAO.EstadoDAO;
+import br.edu.ifsul.dao.CidadeDAO;
+import br.edu.ifsul.dao.EstadoDAO;
 import br.edu.ifsul.modelo.Cidade;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
@@ -16,61 +11,63 @@ import javax.inject.Named;
 
 /**
  *
- * @author 20172PF.CC0095
+ * @author Diego Soria Rios
+ * @email diegosoriarios@gmail.com
+ * @organization IFSUL - Campus Passo Fundo
  */
 @Named(value = "controleCidade")
 @ViewScoped
-public class ControleCidade implements Serializable{
+public class ControleCidade implements Serializable {
+
     @EJB
     private CidadeDAO dao;
     private Cidade objeto;
-
     @EJB
     private EstadoDAO daoEstado;
     
-    public ControleCidade() {
+    public ControleCidade(){
         
     }
     
-    public String listar() {
+    public String listar(){
         return "/privado/cidade/listar?faces-redirect=true";
     }
     
-    public void novo() {
-        objeto = new Cidade();
+    public void novo(){
+        objeto = new Cidade();        
     }
     
-    public void alterar(Object id) {
+    public void alterar(Object id){
         try {
             objeto = dao.getObjectById(id);
-        } catch (Exception e) {
-            Util.mensagemErro("Erro ao recuperar objeto: " + Util.getMensagemErro(e));       
+        } catch (Exception e){
+            Util.mensagemErro("Erro ao recuperar objeto: " + Util.getMensagemErro(e));
         }
     }
     
-    public void remover(Object id) {
+    public void remover(Object id){
         try {
             objeto = dao.getObjectById(id);
             dao.remove(objeto);
             Util.mensagemInformacao("Objeto removido com sucesso!");
-        } catch (Exception e) {
-            Util.mensagemErro("Erro ao remover objeto: " + Util.getMensagemErro(e));       
+        } catch (Exception e){
+            Util.mensagemErro("Erro ao remover objeto: " + Util.getMensagemErro(e));
         }
     }
     
-    public void salvar() {
+    public void salvar(){
         try {
-            if (objeto.getId() == null) {
+            if (objeto.getId() == null){
                 dao.persist(objeto);
             } else {
                 dao.merge(objeto);
             }
             Util.mensagemInformacao("Objeto persistido com sucesso!");
-        } catch (Exception e) {
+        } catch (Exception e){
             Util.mensagemErro("Erro ao persistir objeto: " + Util.getMensagemErro(e));
         }
     }
-    
+
     public CidadeDAO getDao() {
         return dao;
     }
@@ -94,6 +91,4 @@ public class ControleCidade implements Serializable{
     public void setDaoEstado(EstadoDAO daoEstado) {
         this.daoEstado = daoEstado;
     }
-    
-    
 }
