@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:composition template="/templates/template.xhtml">
-        <ui:define name="titulo">CRUD de OrdemServicos</ui:define>
+        <ui:define name="titulo">CRUD de Ordem de Servico</ui:define>
         <ui:define name="conteudo">
             <h:form id="formListagem" prependId="false">
                 <p:growl/>
@@ -59,26 +59,26 @@
                     </p:column>
                     <p:column headerText="Data Abertura">
                         <p:outputLabel value="#{obj.dataAbertura}">
-                            <f:converter converterId="converterCalendar" />
+                            <f:converter converterId="converterCalendar"/>
                         </p:outputLabel>
                     </p:column>
                     <p:column headerText="Data Fechamento">
                         <p:outputLabel value="#{obj.dataFechamento}">
-                            <f:converter converterId="converterCalendar" />
+                            <f:converter converterId="converterCalendar"/>
                         </p:outputLabel>
-                    </p:column>
+                    </p:column>                    
                     <p:column headerText="Pessoa Fisica">
-                        <p:outputLabel value="#{obj.pessoaFisica.nome}" />
-                    </p:column>
+                        <p:outputLabel value="#{obj.pessoaFisica.nome}"/>
+                    </p:column>  
                     <p:column headerText="Usuário">
-                        <p:outputLabel value="#{obj.usuario.nome}" />
+                        <p:outputLabel value="#{obj.usuario.nome}"/>
                     </p:column>
                     <p:column headerText="Equipamento">
-                        <p:outputLabel value="#{obj.equipamento.nome}" />
-                    </p:column>
+                        <p:outputLabel value="#{obj.equipamento.descricao}"/>
+                    </p:column>  
                     <p:column headerText="Status">
-                        <p:outputLabel value="#{obj.status.nome}" />
-                    </p:column>
+                        <p:outputLabel value="#{obj.status}"/>
+                    </p:column>                    
                     <p:column headerText="Ações">
                         <div align="center">
                             <p:commandButton actionListener="#{controleOrdemServico.alterar(obj.id)}"
@@ -92,14 +92,14 @@
                                              title="Remover"
                                              update="@form"
                                              process="@this"
-                                             onclick="if (!confirm('Confirma a exclusão?')) return false"/>
+                                             onclick="if (!confirm('Confirma a exclusão?'))
+                                                         return false"/>
                         </div>
                     </p:column>
                 </p:dataTable>
             </h:form>
-            
-            <ui:include src="formulario.xhtml" />
-           
+            <ui:include src="formulario.xhtml"/>
+
         </ui:define>
     </ui:composition>
 </html>

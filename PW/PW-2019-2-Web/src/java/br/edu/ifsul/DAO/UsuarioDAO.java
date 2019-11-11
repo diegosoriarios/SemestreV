@@ -18,20 +18,20 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable {
         classePersistente = Usuario.class;
         // adicionar as ordenações possiveis
         listaOrdem.add(new Ordem("nomeUsuario", "Nome Usuário", "like"));
-        listaOrdem.add(new Ordem("nome", "Nome", "like"));  
+        listaOrdem.add(new Ordem("nome", "Nome", "like"));        
         // definir a ordem padrão
         ordemAtual = listaOrdem.get(1);
         // inicalizar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);               
     }
-
+    
     @Override
-    public Usuario getObjectById(Object id) {
+    public Usuario getObjectById(Object id){
         Usuario obj = em.find(Usuario.class, id);
-        
+        // Deve-se inicializar as coleções para não dar o erro 
+        // lazyinicializationException
         obj.getPermissoes().size();
         return obj;
-    }
+    }    
 
-    
 }

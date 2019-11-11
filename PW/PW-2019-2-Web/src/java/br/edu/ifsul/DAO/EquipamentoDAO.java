@@ -25,5 +25,5 @@ public class EquipamentoDAO extends DAOGenerico<Equipamento> implements Serializ
         // inicalizar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);               
     }
-    
+
 }

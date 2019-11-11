@@ -2,116 +2,111 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <p:dialog header="Edição" widgetVar="dlg" resizable="false"
               modal="true" width="50%" height="100%">
         <h:form id="formEdicao" prependId="false">
             <p:growl id="growl"/>
-            
             <p:tabView id="tab">
                 <p:tab title="Dados Principais">
                     <div align="center">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="ID"/>
                             <p:inputText value="#{controleOrdemServico.objeto.id}" readonly="true" size="5"/>
-                            
-                            <p:outputLabel value="Data de Abertura" for="txtDataAbertura" />
-                            <p:calendar id="txtDataAbertura" 
-                                        mask="true" 
-                                        value="#{controleOrdemServico.objeto.dataAbertura}"
-                                        pattern="dd/MM/yyyy"
-                                        navigator="true"
-                                        size="10">
-                                <f:converter converterId="converterCalendar" />
+                            <p:outputLabel value="Data de abertura" for="txtDataAbertura"/>
+                            <p:calendar id="txtDataAbertura"
+                                        mask="true" value="#{controleOrdemServico.objeto.dataAbertura}"
+                                        pattern="dd/MM/yyyy" navigator="true" size="10">
+                                <f:converter converterId="converterCalendar"/>
                             </p:calendar>
-                            
-                            <p:outputLabel value="Data de Fechamento" for="txtDataFechamento" />
-                            <p:calendar id="txtDataFechamento" 
-                                        mask="true" 
-                                        value="#{controleOrdemServico.objeto.dataFechamento}"
-                                        pattern="dd/MM/yyyy"
-                                        navigator="true"
-                                        size="10">
-                                <f:converter converterId="converterCalendar" />
-                            </p:calendar>
-                            
-                            <p:outputLabel value="Valor Total" for="txtValorTotal" />
+                            <p:outputLabel value="Data de fechamento" for="txtDataFechamento"/>
+                            <p:calendar id="txtDataFechamento"
+                                        mask="true" value="#{controleOrdemServico.objeto.dataFechamento}"
+                                        pattern="dd/MM/yyyy" navigator="true" size="10">
+                                <f:converter converterId="converterCalendar"/>
+                            </p:calendar>                            
+                            <p:outputLabel value="Valor Total" for="txtValorTotal"/>
                             <p:inputNumber id="txtValorTotal" 
-                                           value="#{controleOrdemServico.objeto.valorTotal}" 
+                                           value="#{controleOrdemServico.objeto.valorTotal}"
                                            thousandSeparator="" decimalSeparator="."
-                                           decimalPlaces="2" size="10" />
-                            
-                            <p:outputLabel value="Valor Serviços" for="txtValorServicos" />
-                            <p:inputNumber id="txtValorServicos"
+                                           decimalPlaces="2" size="10"/>
+                            <p:outputLabel value="Valor Serviços" for="txtValorServicos"/>
+                            <p:inputNumber id="txtValorServicos" 
+                                           value="#{controleOrdemServico.objeto.valorServicos}"
+                                           thousandSeparator="" decimalSeparator="."
+                                           decimalPlaces="2" size="10"/>   
+                            <p:outputLabel value="Valor Produtos" for="txtValorProdutos"/>
+                            <p:inputNumber id="txtValorProdutos" 
                                            value="#{controleOrdemServico.objeto.valorProdutos}"
                                            thousandSeparator="" decimalSeparator="."
-                                           decimalPlaces="2" size="10" />
-                            
-                            <p:outputLabel value="Status" for="selectStatus" />
-                            <p:selectOneMenu id="selectStatus" value="#{controleOrdemServico.objeto.status}">
-                                <f:selectItem itemLabel="ABERTA" itemValue="ABERTA" />
-                                <f:selectItem itemLabel="FECHADA" itemValue="FECHADA" />
-                                <f:selectItem itemLabel="CANCELADA" itemValue="CANCELADA" />
-                                <f:selectItem itemLabel="EXECUTANDO" itemValue="EXECUTANDO" />
-                                <f:selectItem itemLabel="RETIRAR" itemValue="RETIRAR" />
+                                           decimalPlaces="2" size="10"/>                               
+                            <p:outputLabel value="Status" for="selectStatus"/>
+                            <p:selectOneMenu id="selectStatus" 
+                                             value="#{controleOrdemServico.objeto.status}">
+                                <f:selectItem itemLabel="ABERTA" itemValue="ABERTA"/>
+                                <f:selectItem itemLabel="FECHADA" itemValue="FECHADA"/>
+                                <f:selectItem itemLabel="CANCELADA" itemValue="CANCELADA"/>
+                                <f:selectItem itemLabel="EXECUTANDO" itemValue="EXECUTANDO"/>
+                                <f:selectItem itemLabel="RETIRAR" itemValue="RETIRAR"/>
                             </p:selectOneMenu>
-                            
-                            <p:outputLabel value="Forma de Pagamento" for="selectFormaPagamento" />
-                            <p:selectOneMenu id="selectFormaPagamento" value="#{controleOrdemServico.objeto.formaPagamento}">
-                                <f:selectItem itemLabel="AVISTA" itemValue="AVISTA" />
-                                <f:selectItem itemLabel="APRAZO" itemValue="APRAZO" />
+                            <p:outputLabel value="Forma de Pagamento" for="selectPagamento"/>
+                            <p:selectOneMenu id="selectPagamento"
+                                             value="#{controleOrdemServico.objeto.formaPagamento}">
+                                <f:selectItem itemLabel="AVISTA" itemValue="AVISTA"/>
+                                <f:selectItem itemLabel="APRAZO" itemValue="APRAZO"/>                                
                             </p:selectOneMenu>
-                            
-                            <p:outputLabel value="Quantidade de Parcelas" for="txtParcelas" />
-                            <p:inputNumber id="txtParcelas" value="#{controleOrdemServico.objeto.quantidadeParcelas}"
+                            <p:outputLabel value="Quantidade de parcelas" for="txtParcelas"/>
+                            <p:inputNumber id="txtParcelas"
+                                           value="#{controleOrdemServico.objeto.quantidadeParcelas}"
                                            thousandSeparator="" decimalSeparator=""
-                                           decimalPlaces="0" size="5" />
-                            
+                                           decimalPlaces="0" size="5"/>
+
                             <p:outputLabel value="Pessoa Física" for="selectPessoaFisica"/>
-                            <p:selectOneMenu id="selectPessoaFisica" value="#{controleOrdemServico.objeto.pessoaFisica}"
+                            <p:selectOneMenu id="selectPessoaFisica" 
+                                             value="#{controleOrdemServico.objeto.pessoaFisica}"
                                              filter="true" filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
                                 <f:converter binding="#{converterPessoaFisica}"/>
-                                <f:selectItems value="#{controleOrdemServico.pessoaFisicaDAO.listaTodos}"
+                                <f:selectItems value="#{controleOrdemServico.daoPessoaFisica.listaTodos}"
                                                var="pf" itemLabel="#{pf.nome}"/>
                             </p:selectOneMenu>
-                            
-                            <p:outputLabel value="Usuario" for="selectUsuario"/>
-                            <p:selectOneMenu id="selectUsuario" value="#{controleOrdemServico.objeto.usuario}"
+                            <p:outputLabel value="Usuário" for="selectUsuario"/>
+                            <p:selectOneMenu id="selectUsuario" 
+                                             value="#{controleOrdemServico.objeto.usuario}"
                                              filter="true" filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
                                 <f:converter binding="#{converterUsuario}"/>
-                                <f:selectItems value="#{controleOrdemServico.usuarioDAO.listaTodos}"
-                                               var="u" itemLabel="#{u.nome}"/>
-                            </p:selectOneMenu>
-                            
+                                <f:selectItems value="#{controleOrdemServico.daoUsuario.listaTodos}"
+                                               var="usu" itemLabel="#{usu.nome}"/>
+                            </p:selectOneMenu>                            
                             <p:outputLabel value="Equipamento" for="selectEquipamento"/>
-                            <p:selectOneMenu id="selectEquipamento" value="#{controleOrdemServico.objeto.equipamento}"
+                            <p:selectOneMenu id="selectEquipamento" 
+                                             value="#{controleOrdemServico.objeto.equipamento}"
                                              filter="true" filterMatchMode="startsWith">
                                 <f:selectItem itemLabel="Selecione um registro"
                                               noSelectionOption="true"/>
                                 <f:converter binding="#{converterEquipamento}"/>
-                                <f:selectItems value="#{controleOrdemServico.equipamentoDAO.listaTodos}"
-                                               var="eqp" itemLabel="#{eqp.id} - #{eqp.descricao} - #{eqp.numeroSerie}" />
-                            </p:selectOneMenu>
+                                <f:selectItems value="#{controleOrdemServico.daoEquipamento.listaTodos}"
+                                               var="equi" 
+                                               itemLabel="#{equi.id} - #{equi.descricao} - #{equi.numeroSerie}"/>
+                            </p:selectOneMenu>                            
                         </p:panelGrid>
                     </div>
                 </p:tab>
-                <p:tab title="Descrição e Resolução de Problemas">
-                    <p:outputLabel value="Descrição do problema" for="txtDescricaoProblema" />
+                <p:tab title="Descrição e Resolução do problema">
+                    <p:outputLabel value="Descrição do problema" for="txtDescricaoProblema"/>
                     <p:textEditor widgetVar="editorDescricao" id="txtDescricaoProblema"
                                   value="#{controleOrdemServico.objeto.descricaoProblema}"
-                                  height="140" />
-                    <p:outputLabel value="Resolução do problema" for="txtResolucaoProblema" />
-                    <p:textEditor widgetVar="editorDescricao" id="txtResolucaoProblema"
+                                  height="140"/>
+                    <p:outputLabel value="Resolução do problema" for="txtResolucaoProblema"/>
+                    <p:textEditor widgetVar="editorResolucao" id="txtResolucaoProblema"
                                   value="#{controleOrdemServico.objeto.resolucaoProblema}"
-                                  height="140" />
+                                  height="140"/>                    
                 </p:tab>
-                
                 <p:tab title="Serviços">
                     <p:dataTable value="#{controleOrdemServico.objeto.listaServicos}"
                                  var="itemServico" rowIndexVar="idxItemServico"
@@ -121,50 +116,51 @@
                                              actionListener="#{controleOrdemServico.novoItemServico()}"
                                              update=":formItemServico" icon="pi pi-plus"
                                              process="@this"
-                                             oncomplete="PF('dlgItemServico').show();" />
+                                             oncomplete="PF('dlgItemServico').show();"/>
                         </f:facet>
                         <p:column headerText="ID">
-                            <p:outputLabel value="#{itemServico.id}" />
+                            <p:outputLabel  value="#{itemServico.id}"/>
                         </p:column>
-                        <p:column headerText="Servico">
-                            <p:outputLabel value="#{itemServico.servico.id}" />
-                        </p:column>
+                        <p:column headerText="Serviço">
+                            <p:outputLabel  value="#{itemServico.servico.nome}"/>
+                        </p:column>  
                         <p:column headerText="Quantidade">
-                            <p:outputLabel value="#{itemServico.quantidade}" />
-                        </p:column>
+                            <p:outputLabel  value="#{itemServico.quantidade}"/>
+                        </p:column>                           
                         <p:column headerText="Valor Unitário">
-                            <p:outputLabel value="#{itemServico.valorUnitario}">
-                                <f:convertNumber pattern="R$ 0.00" />
+                            <p:outputLabel  value="#{itemServico.valorUnitario}">
+                                <f:convertNumber pattern="R$ 0.00"/>
                             </p:outputLabel>
-                        </p:column>
+                        </p:column> 
                         <p:column headerText="Valor Total">
-                            <p:outputLabel value="#{itemServico.valorTotal}">
-                                <f:convertNumber pattern="R$ 0.00" />
+                            <p:outputLabel  value="#{itemServico.valorTotal}">
+                                <f:convertNumber pattern="R$ 0.00"/>
                             </p:outputLabel>
-                        </p:column>
-                        
+                        </p:column>   
                         <p:column headerText="Ações">
                             <div align="center">
                                 <p:commandButton icon="pi pi-pencil"
                                                  actionListener="#{controleOrdemServico.alterarItemServico(idxItemServico)}"
                                                  update=":formItemServico" process="@this"
-                                                 oncomplete="PF('dlgItemServico').show();" />
+                                                 oncomplete="PF('dlgItemServico').show();"/>
                                 <p:commandButton icon="pi pi-trash"
-                                                 actionListener="#{controleOrdemServico.removerItemServico(idxItemServico)}"
+                                                 actionListener="#{controleOrdemServico.removerItemServico(idxItemServico)}"             
                                                  process="@this"
-                                                 update="tab:listaItensServico growl tab:txtValorTotal tab:txtValorServicos" 
-                                                 onclick="if (!confirm('Confirma a exclusão?')) return false" />
+                                                 update="tab:listaItensServico growl tab:txtValorTotal tab:txtValorServicos"
+                                                 onclick="if (!confirm('Confirma a exclusão?'))
+                                                             return false"/>
                             </div>
                         </p:column>
-                        
                     </p:dataTable>
                 </p:tab>
                 <p:tab title="Produtos">
+
                 </p:tab>
                 <p:tab title="Parcelas">
+
                 </p:tab>
             </p:tabView>
-            
+
             <p:panel>
                 <div align="center">
                     <p:commandButton value="Salvar"
@@ -178,53 +174,55 @@
         </h:form>
 
     </p:dialog>
-    
     <p:dialog header="Edição de Item de Serviço"
-              widgetVar="dlgItemServico"
-        resizable="false" modal="true">
-        
+              widgetVar="dlgItemServico" resizable="false" modal="true">
         <h:form id="formItemServico">
-            <p:growl />
+            <p:growl/>
             <p:panelGrid columns="2">
                 <f:facet name="footer">
                     <div align="center">
                         <p:commandButton value="Salvar"
                                          actionListener="#{controleOrdemServico.salvarItemServico()}"
-                                         update="@form tab:listaItensServico tab:txtValorTotal
-                                         tab:txtValorServicos growl"
-                                         process="@form" 
-                                         oncomplete="if (!args.validationFailed){PF('dlgItemServico').hide();}" />
+                                         update="@form tab:listaItensServico 
+                                         tab:txtValorTotal tab:txtValorServicos growl"
+                                         process="@form"
+                                         oncomplete="if(!args.validationFailed){PF('dlgItemServico').hide();}"/>
                     </div>
                 </f:facet>
-                <p:outputLabel value="Serviço" for="selectServico" />
+                <p:outputLabel value="Serviço" for="selectServico"/>
                 <p:selectOneMenu id="selectServico"
                                  value="#{controleOrdemServico.itemServico.servico}"
                                  filter="true" filterMatchMode="startsWith">
-                    <f:converter binding="converterServico" />
-                    <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro" />
-                    <f:selectItems value="#{controleOrdemServico.servicoDAO.listaTodos}" var="s"
-                                  itemLabel="#{s.nome}" />
+                    <f:converter binding="#{converterServico}"/>
+                    <f:selectItem noSelectionOption="true" itemLabel="Selecione um registro"/>
+                    <f:selectItems value="#{controleOrdemServico.daoServico.listaTodos}"
+                                   var="ser" itemLabel="#{ser.nome}"/>
+                    <p:ajax listener="#{controleOrdemServico.atualizaValorUnitarioServico()}"
+                            update="txtValorUnitarioServico"/>
                 </p:selectOneMenu>
-                
-                <p:outputLabel value="Quantidade" for="txtQuantidade" />
-                <p:inputNumber id="txtQuantidade" value="#{controleOrdemServico.itemServico.quantidade}"
+                <p:outputLabel value="Quantidade" for="txtQuantidade"/>
+                <p:inputNumber id="txtQuantidade" 
+                               value="#{controleOrdemServico.itemServico.quantidade}"
                                thousandSeparator="" decimalSeparator="" decimalPlaces="0"
-                               size="10" />
-                
-                <p:outputLabel value="Valor Unitário" for="txtValorUnitarioServico" />
-                <p:inputNumber id="txtValorUnitarioServico" value="#{controleOrdemServico.itemServico.valorUnitario}"
+                               size="10">
+                    <p:ajax listener="#{controleOrdemServico.calculaValorTotalServico()}"
+                            update="txtValorTotalServico" event="keyup"/>
+                </p:inputNumber>
+                <p:outputLabel value="Valor Unitário" for="txtValorUnitarioServico"/>
+                <p:inputNumber id="txtValorUnitarioServico" 
+                               value="#{controleOrdemServico.itemServico.valorUnitario}"
                                thousandSeparator="" decimalSeparator="." decimalPlaces="2"
-                               size="10" />
-                
-                <p:outputLabel value="Valor Total" for="txtValorTotalServico" />
-                <p:inputNumber id="txtValorTotalServico" value="#{controleOrdemServico.itemServico.valorTotal}"
+                               size="10" readonly="true"/> 
+                <p:outputLabel value="Valor Total" for="txtValorTotalServico"/>
+                <p:inputNumber id="txtValorTotalServico" 
+                               value="#{controleOrdemServico.itemServico.valorTotal}"
                                thousandSeparator="" decimalSeparator="." decimalPlaces="2"
-                               size="10" />
+                               size="10" readonly="true"/>                    
             </p:panelGrid>
-        </h:form>
-        
-        <ui:include src="/templates/ajaxstatus.xhtml" />
-        
+        </h:form>     
+        <ui:include src="/templates/ajaxstatus.xhtml"/>
     </p:dialog>
+
+
 </html>
 
