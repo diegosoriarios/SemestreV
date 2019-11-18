@@ -94,6 +94,12 @@
                                              process="@this"
                                              onclick="if (!confirm('Confirma a exclusão?'))
                                                          return false"/>
+                            <p:commandButton 
+                                actionListener="#{controleOrdemServico.imprimeOrdem(obj.id)}"
+                                icon="pi pi-print"
+                                title="Imprimir"
+                                ajax="false"
+                                onclick="this.form.target='_blank';"/>
                         </div>
                     </p:column>
                 </p:dataTable>

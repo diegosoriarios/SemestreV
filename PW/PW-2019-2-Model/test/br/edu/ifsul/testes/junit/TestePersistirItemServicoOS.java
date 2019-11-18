@@ -37,7 +37,7 @@ public class TestePersistirItemServicoOS {
 
     @Test
     public void teste() throws IOException {
-        OrdemServico os = em.find(OrdemServico.class, 8);
+        OrdemServico os = em.find(OrdemServico.class, 1);
         ItemServico is = new ItemServico();
         is.setServico(em.find(Servico.class, 1));
         is.setQuantidade(1);

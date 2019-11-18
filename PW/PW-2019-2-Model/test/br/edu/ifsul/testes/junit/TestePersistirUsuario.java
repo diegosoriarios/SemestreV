@@ -43,7 +43,7 @@ public class TestePersistirUsuario {
         try {
             Usuario obj = new Usuario();
             obj.setEmail("diegosoriarios@gmail.com");
-            obj.setNome("Diego");
+            obj.setNome("Diego Soria Rios");
             obj.setNomeUsuario("diegosoriarios");
             obj.setSenha("123456");
             obj.setTelefoneAlternativo("(54)89387-9876");

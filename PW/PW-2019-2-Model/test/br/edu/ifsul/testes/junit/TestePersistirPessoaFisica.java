@@ -46,7 +46,7 @@ public class TestePersistirPessoaFisica {
         try {
             PessoaFisica obj = new PessoaFisica();
             obj.setEmail("diegosoriarios@gmail.com");
-            obj.setNome("Diego");
+            obj.setNome("Diego Soria Rios");
             obj.setNomeUsuario("diegosoriariospf");
             obj.setSenha("123456");
             obj.setTelefoneAlternativo("(54)89387-9876");

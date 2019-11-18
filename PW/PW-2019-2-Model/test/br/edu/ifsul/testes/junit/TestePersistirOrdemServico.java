@@ -44,7 +44,7 @@ public class TestePersistirOrdemServico {
         obj.setDataAbertura(Calendar.getInstance());        
         obj.setDataFechamento(Calendar.getInstance());
         obj.setDescricaoProblema("Windows com virus");        
-        obj.setEquipamento(em.find(Equipamento.class, 2));
+        obj.setEquipamento(em.find(Equipamento.class, 1));
         obj.setFormaPagamento(FormaPagamento.AVISTA);
         obj.setPessoaFisica(em.find(PessoaFisica.class, "diegosoriariospf"));        
         obj.setResolucaoProblema("Formatação");

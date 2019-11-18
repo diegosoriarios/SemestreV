@@ -42,7 +42,7 @@ public class TestePersistirPermissaoUsuario {
     public void teste(){
         boolean exception = false;
         try {
-            Usuario u = em.find(Usuario.class, "Diego");   
+            Usuario u = em.find(Usuario.class, "diegosoriarios");   
             
             Permissao p1 = em.find(Permissao.class,"ADMINISTRADOR");
             

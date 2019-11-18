@@ -12,7 +12,9 @@ import br.edu.ifsul.modelo.OrdemServico;
 import br.edu.ifsul.util.Util;
 import br.edu.ifsul.util.UtilRelatorios;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -43,11 +45,22 @@ public class ControleOrdemServico implements Serializable {
     private ItemServico itemServico;
     private Boolean novoItemServico;
     
-    public ControleOrdemServico(){}
+    public ControleOrdemServico(){
+        
+    }
     
-    public void imprimeProdutos() {
+    public void imprimeProdutos(){
         HashMap parametros = new HashMap();
-        UtilRelatorios.imprimeRelatorio("relatorioProdutos", parametros, daoProduto.getListaTodos());
+        UtilRelatorios.imprimeRelatorio("relatorioProdutos", 
+                parametros, daoProduto.getListaTodos());
+    }
+    
+    public void imprimeOrdem(Integer id){
+        objeto = dao.getObjectById(id);
+        List<OrdemServico> lista = new ArrayList<>();
+        lista.add(objeto);
+        HashMap parametros = new HashMap();
+        UtilRelatorios.imprimeRelatorio("relatorioOrdem", parametros, lista);
     }
     
     public void atualizaValorUnitarioServico(){

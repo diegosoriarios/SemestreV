@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subOrdem" pageWidth="535" pageHeight="842" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a7f13c4e-63dc-4910-9076-6beb2017ae80">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="servico" class="br.edu.ifsul.modelo.Servico">
+		<fieldDescription><![CDATA[servico]]></fieldDescription>
+	</field>
+	<field name="quantidade" class="java.lang.Integer">
+		<fieldDescription><![CDATA[quantidade]]></fieldDescription>
+	</field>
+	<field name="valorUnitario" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorUnitario]]></fieldDescription>
+	</field>
+	<field name="valorTotal" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorTotal]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="136" height="30" uuid="8c26f360-2d39-4b7c-9906-1fe05e019b70">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e745081-7e7d-4aee-8211-e95c385260e1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Serviço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="79" height="30" uuid="721685c4-efa0-4029-93e7-25b2995ae8dc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dfaf2ecb-d608-47f6-a807-462175b8aed9"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="0" width="133" height="30" uuid="efd22eb5-88c7-40a1-8a9d-630ac2fb647e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f42f33f4-620e-4819-9944-cd16c743f567"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Valor Unitário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="133" height="30" uuid="a4bdd116-4f9e-41f9-90f0-ba67e8f6d87d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e0a76151-0c32-4ac0-b53a-916576f2df24"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<text><![CDATA[Valor Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="190" height="30" uuid="2c8d6a47-5831-4027-a458-7646ea318363">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9e745081-7e7d-4aee-8211-e95c385260e1"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{servico}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="79" height="30" uuid="24ab4a87-980e-44a8-a23b-64037eb51bc4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dfaf2ecb-d608-47f6-a807-462175b8aed9"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ 0.00">
+				<reportElement x="269" y="0" width="133" height="30" uuid="60282a1e-7503-4dad-851e-a503e5616239">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f42f33f4-620e-4819-9944-cd16c743f567"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorUnitario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ 0.00">
+				<reportElement x="402" y="0" width="133" height="30" uuid="da049681-1958-4449-b947-725bcb682a9f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e0a76151-0c32-4ac0-b53a-916576f2df24"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valorTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

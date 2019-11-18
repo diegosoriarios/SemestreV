@@ -39,7 +39,8 @@ public class FabricaObjetos {
         return lista;
     }
     
-    public static List<OrdemServico> carregaOrdem() {
+    
+    public static List<OrdemServico> carregaOrdem(){
         List<OrdemServico> lista = new ArrayList<>();
         OrdemServico ordem = new OrdemServico();
         lista.add(ordem);
@@ -58,8 +59,8 @@ public class FabricaObjetos {
         ordem.setEquipamento(e);
         
         PessoaFisica pf = new PessoaFisica();
-        pf.setNome("Eu Mesmo");
-        pf.setCpf("123.456.789-00");
+        pf.setNome("Sergio dos Santos");
+        pf.setCpf("985.384.345-98");
         ordem.setPessoaFisica(pf);
         
         Usuario u = new Usuario();
@@ -69,13 +70,13 @@ public class FabricaObjetos {
         
         Servico s = new Servico();
         s.setNome("Instalação de software");
-        
         ItemServico is = new ItemServico();
         is.setServico(s);
         is.setQuantidade(1);
         is.setValorUnitario(100.00);
         is.setValorTotal(100.00);
         ordem.adicionarServico(is);
+        
         
         return lista;
     }
