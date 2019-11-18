@@ -15,7 +15,7 @@
                 <p:menuitem value="Inicio"
                             url="#{facesContext.externalContext.requestContextPath}/index.xhtml"
                             icon="pi pi-home"/>
-                <p:submenu label="Cadastros">
+                <p:submenu label="Cadastros" rendered="#{controleLogin.usuarioAutenticado != null}">
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controleEstado.listar()}"
@@ -32,7 +32,7 @@
                         </p:submenu> 
                     </p:column>
                 </p:submenu>
-                <p:submenu label="Relatórios">
+                <p:submenu label="Relatórios" rendered="#{controleLogin.usuarioAutenticado != null}">
                     <p:column>
                         <p:submenu label="Básicos">
                             <p:menuitem 
@@ -43,6 +43,23 @@
                         </p:submenu>
                     </p:column>
                 </p:submenu>
+                
+                <p:submenu label="Usuario: #{controleLogin.usuarioAutenticado != null ? 
+                                             controleLogin.usuarioAutenticado.nome : ''}">
+                    <p:column>
+                        <p:submenu label="Efetuar login"
+                                   rendered="#{controleLogin.usuarioAutenticado == null}">
+                            <p:menuitem action="#{controleLogin.irPaginaLogin()}"
+                                        ajax="false" value="Login" icon="pi pi-user" />
+                        </p:submenu>
+                        <p:submenu label="Efetuar logout"
+                                   rendered="#{controleLogin.usuarioAutenticado != null}">
+                            <p:menuitem action="#{controleLogin.efetuarLogout()}"
+                                        ajax="false" value="Logout" icon="pi pi-power-off" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+                
             </p:megaMenu>
 
         </h:form>

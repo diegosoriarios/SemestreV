@@ -93,7 +93,8 @@
                                              update="@form"
                                              process="@this"
                                              onclick="if (!confirm('Confirma a exclusão?'))
-                                                         return false"/>
+                                                         return false"
+                                             rendered="#{p:ifGranted('ADMINISTRADOR')}"/>
                             <p:commandButton 
                                 actionListener="#{controleOrdemServico.imprimeOrdem(obj.id)}"
                                 icon="pi pi-print"
